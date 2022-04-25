@@ -1,5 +1,5 @@
 
- <nav class="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Eleventh navbar example">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4" aria-label="Eleventh navbar example">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><?= APP_NAME ?> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
