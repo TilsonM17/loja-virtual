@@ -1,4 +1,4 @@
-
+<?php use App\helpers\Func; ?>
  <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4" aria-label="Eleventh navbar example">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><?= APP_NAME ?> </a>
@@ -15,7 +15,7 @@
             <?php if(!isset($_SESSION['id_usuario'])):?>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Criar Conta</a>
+              <a class="nav-link" href="<?php Func::url('nova_conta') ?>">Criar Conta</a>
             </li>
 
             <li class="nav-item">
@@ -29,17 +29,17 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link">Promossão</a>
+              <a class="nav-link"></a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link">Minha Conta</a>
+              <a class="nav-link"> <i class="fa-solid fa-right-to-bracket"> </i></a>
             </li>
 
             <?php endif; ?>
 
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Carrinho</a>
+              <a class="nav-link active" aria-current="page" href="#"> <i class="fa-solid fa-cart-shopping"></i>  </a>
             </li>
           </ul>
           <form>

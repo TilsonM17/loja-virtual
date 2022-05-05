@@ -1,8 +1,12 @@
 <?php $this->layout('_layout', ['title' => 'User Profile']) ?>
-
+ <!--Carrega o navbar do site-->
+ <?= $this->insert('_navbar') ?>
 
 <div class="container">
     
+    <p class="h3 text-center"><?=APP_NAME?></p>
+
+
     <p>Aliqua labore anim nostrud mollit fugiat reprehenderit in labore cupidatat aliquip magna. Sunt occaecat sunt sunt nostrud cupidatat minim. Irure commodo ipsum culpa incididunt tempor esse anim ea est consequat. Amet laboris esse deserunt id minim culpa laborum nisi labore. Dolore enim aute in quis cillum anim adipisicing velit labore.
 
 Esse deserunt ea aliquip ea nostrud. Tempor cillum ad dolor ullamco ad do non incididunt. Pariatur in sint irure eu minim in aliqua officia nisi. Occaecat sunt labore est ipsum amet enim. Tempor ut eiusmod in exercitation pariatur eiusmod consectetur cupidatat irure excepteur culpa sunt sunt. Velit magna cupidatat eiusmod reprehenderit dolor proident consequat laborum nulla consequat ea. Et labore et nisi eiusmod eu labore Lorem deserunt dolor dolor elit non tempor nisi.

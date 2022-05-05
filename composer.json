@@ -8,7 +8,7 @@
         ]
     },
     "require": {
-        "coffeecode/router": "^2.0",
+        "izniburak/router": "^2.0",
         "league/plates": "^3.4",
         "doctrine/orm": "^2.12"
     }

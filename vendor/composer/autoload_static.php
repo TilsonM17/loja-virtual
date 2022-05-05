@@ -11,9 +11,10 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'afeb12663dfc2d747c0c0b102ec237a3' => __DIR__ . '/../..' . '/config/core.php',
     );
 
@@ -28,6 +29,7 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Component\\String\\' => 25,
+            'Symfony\\Component\\HttpFoundation\\' => 33,
             'Symfony\\Component\\Console\\' => 26,
         ),
         'P' => 
@@ -53,9 +55,9 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
         ),
-        'C' => 
+        'B' => 
         array (
-            'CoffeeCode\\Router\\' => 18,
+            'Buki\\Router\\' => 12,
         ),
         'A' => 
         array (
@@ -95,6 +97,10 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
         'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
+        ),
+        'Symfony\\Component\\HttpFoundation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
         'Symfony\\Component\\Console\\' => 
         array (
@@ -154,12 +160,12 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
         ),
         'Doctrine\\Common\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
-            1 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+            0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+            1 => __DIR__ . '/..' . '/doctrine/event-manager/lib/Doctrine/Common',
         ),
-        'CoffeeCode\\Router\\' => 
+        'Buki\\Router\\' => 
         array (
-            0 => __DIR__ . '/..' . '/coffeecode/router/src',
+            0 => __DIR__ . '/..' . '/izniburak/router/src',
         ),
         'App\\' => 
         array (
