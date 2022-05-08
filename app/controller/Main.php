@@ -21,13 +21,14 @@ class Main{
        echo $this->plate->render('home');
      }
 
-    public function teste(){
-         echo "teste";
+    public function nova_conta(){
+        echo $this->plate->render("nova_conta");
     }
 
-    public function nova_conta(){
-        echo "Nova Conta";
+    public function teste(){
+       
     }
+     
 
     public function error($e){
         echo $this->plate->render("_erro",['e' => $e]);

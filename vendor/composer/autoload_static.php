@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
+class ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -28,9 +28,12 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
             'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Contracts\\Cache\\' => 24,
+            'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\HttpFoundation\\' => 33,
             'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Component\\Cache\\' => 24,
         ),
         'P' => 
         array (
@@ -53,6 +56,7 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
         ),
         'B' => 
@@ -94,6 +98,14 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
+        'Symfony\\Contracts\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/cache-contracts',
+        ),
+        'Symfony\\Component\\VarExporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-exporter',
+        ),
         'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
@@ -105,6 +117,10 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Symfony\\Component\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/cache',
         ),
         'Psr\\Log\\' => 
         array (
@@ -158,6 +174,10 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
         ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
@@ -186,9 +206,9 @@ class ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0e027b7821b6cf89b461025b99b21ab2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e::$classMap;
 
         }, null, ClassLoader::class);
     }

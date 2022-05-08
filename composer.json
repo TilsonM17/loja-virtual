@@ -10,6 +10,8 @@
     "require": {
         "izniburak/router": "^2.0",
         "league/plates": "^3.4",
-        "doctrine/orm": "^2.12"
+        "doctrine/orm": "^2.12",
+        "symfony/cache": "^6.0",
+        "doctrine/annotations": "^1.13"
     }
 }
