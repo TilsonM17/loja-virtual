@@ -1,5 +1,6 @@
 <?php
-// bootstrap.php
+
+namespace TilsonM17\config;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
@@ -7,23 +8,26 @@ use Doctrine\ORM\ORMSetup;
 /**
  * Retorna o $entityManager
  */
+class GestorEntidade{
 
- function GetEntityManager(){
-    $paths = array(dirname(__DIR__) . 'app/models');
-    $isDevMode = false;
+    public static function GetEntityManager(){
+        $paths = array(dirname(__DIR__) . '/app/models');
+        $isDevMode = true;
+        
+        // the connection configuration
+        $dbParams = array(
+            'driver'   => 'pdo_mysql',
+            'user'     => DATA_USER,
+            'password' => DATA_PASS,
+            'dbname'   => 'db_loja',
+        );
+        
+        $config = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+        $entityManager = EntityManager::create($dbParams, $config);
     
-    // the connection configuration
-    $dbParams = array(
-        'driver'   => 'pdo_mysql',
-        'user'     => '',
-        'password' => '',
-        'dbname'   => 'db_loja',
-    );
-    
-    $config = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode);
-    $entityManager = EntityManager::create($dbParams, $config);
-
-    return $entityManager;
+        return $entityManager;
+    }
 }
+
 
 

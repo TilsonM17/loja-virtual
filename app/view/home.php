@@ -2,11 +2,15 @@
  <!--Carrega o navbar do site-->
  <?= $this->insert('_navbar') ?>
 
-<div class="container">
-    
-    <p class="h3 text-center"><?=APP_NAME?></p>
+<section class="container">
+    <div class="row">
+        <div class="col-md 12">
+            <p class="text-center h3"><?=APP_NAME?></p>
+        </div>
+        <div class="col-md-4">
+            
+        </div>
+    </div>
+</section>
 
-
-    <p>[Aqui vai os produtos]</p>
-
-</div>
+<?= $this->insert('_footer') ?>

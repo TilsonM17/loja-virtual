@@ -1,7 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-            "App\\":"app/"
+            "App\\":"app/",
+            "TilsonM17\\config\\":"config"
         },
         "files":[
             "config/core.php"
@@ -12,6 +13,7 @@
         "league/plates": "^3.4",
         "doctrine/orm": "^2.12",
         "symfony/cache": "^6.0",
-        "doctrine/annotations": "^1.13"
+        "doctrine/annotations": "^1.13",
+        "phpmailer/phpmailer": "^6.6"
     }
 }

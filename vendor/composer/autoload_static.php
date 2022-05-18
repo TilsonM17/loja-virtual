@@ -19,6 +19,10 @@ class ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'TilsonM17\\config\\' => 17,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -40,6 +44,7 @@ class ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'L' => 
         array (
@@ -70,6 +75,10 @@ class ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e
     );
 
     public static $prefixDirsPsr4 = array (
+        'TilsonM17\\config\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/config',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -133,6 +142,10 @@ class ComposerStaticInitfff3d1a0e41a77894322637dbd050b3e
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'League\\Plates\\' => 
         array (

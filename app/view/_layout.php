@@ -18,7 +18,7 @@
     <!--Carrega o conteudo principal do site-->
     <?= $this->section('content')?>
 
-    <?= $this->insert('_footer') ?>
+   
     
 </main>
     
