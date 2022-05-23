@@ -52,6 +52,7 @@ class Livro{
         private $update_at;
         private $deleted_at;
 
+    
         /**
          * Criar todos os setter e getters das propriedade da classe
          */
@@ -115,6 +116,15 @@ class Livro{
                 return $this->deleted_at;
         }
 
+        /**
+         * Metodo que vai fazer selecte em todos os livros
+         * E fazer um array com todos os livros
+         * Junto deste array vai retornar a imagem destes livros.
+         */ 
+         
+        public function selecionaLivrosImagens(){
+
+        }
 
      
 }

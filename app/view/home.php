@@ -1,4 +1,8 @@
-<?php $this->layout('_layout', ['title' => 'User Profile']) ?>
+<?php
+
+use App\helpers\Func;
+
+ $this->layout('_layout', ['title' => 'User Profile']) ?>
  <!--Carrega o navbar do site-->
  <?= $this->insert('_navbar') ?>
 
@@ -8,7 +12,7 @@
             <p class="text-center h3"><?=APP_NAME?></p>
         </div>
         <div class="col-md-4">
-            
+          
         </div>
     </div>
 </section>

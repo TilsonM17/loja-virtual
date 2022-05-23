@@ -19,6 +19,7 @@ use Buki\Router\Router;
  $router->get("/validar_email_submit/:string","Main@validar_email_submit");
 
  $router->get("/login","Main@login");
+ $router->post("/login_submit","Main@login_submit");
 
  $router->get('/a',"Main@teste");
 

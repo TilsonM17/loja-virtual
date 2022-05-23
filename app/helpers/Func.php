@@ -18,13 +18,14 @@ namespace App\helpers;
     public static function printArray(array|object $comp1,array|object|null $comp2 = null) {
 
         echo "=========================================================================","<pre>";
+        echo "<h2>Primeiro Array</h2>";
         echo "<br>";
         print_r($comp1);
        
         if (is_array($comp2) or is_object($comp2)) {
             echo "<hr>";
             echo "<h2>Segundo Array</h2>";
-            print_r($comp1);
+            print_r( $comp2);
             echo "<hr>";
         }
         echo "=========================================================================","<br>";

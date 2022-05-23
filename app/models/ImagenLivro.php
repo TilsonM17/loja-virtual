@@ -11,15 +11,15 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 use App\models\Livro;
-
+use Countable;
+use Iterator;
 
 /**
  * @Entity
  * @Table(name="tb_livro_img")
  */
 
-class ImagenLivro{
-
+class ImagenLivro { 
 
         # id_livro_img, id_livro, img_nome
 
@@ -43,6 +43,7 @@ class ImagenLivro{
          */
         private string $img_nome;
 
+        private array $ids_livros = [];
         # Criar os getter e os setter das propriedades da classe
 
         public function GetIdLivroImg(){
@@ -61,6 +62,15 @@ class ImagenLivro{
             $this->img_nome = $img_nome;
         }
 
-     
+        public function mesclarImagemLivros(array $livro,$gestor): array{
+            foreach($livro as $key => $item){
+             
+                array_push($this->ids_livros,$item['id_livro']);
+            }
+            return $this->ids_livros;
+
+        }
+
+       
       
 }

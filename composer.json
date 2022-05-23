@@ -2,7 +2,8 @@
     "autoload": {
         "psr-4": {
             "App\\":"app/",
-            "TilsonM17\\config\\":"config"
+            "TilsonM17\\config\\":"config",
+            "TilsonM17\\Teste\\":"test"
         },
         "files":[
             "config/core.php"
@@ -14,6 +15,9 @@
         "doctrine/orm": "^2.12",
         "symfony/cache": "^6.0",
         "doctrine/annotations": "^1.13",
-        "phpmailer/phpmailer": "^6.6"
+        "phpmailer/phpmailer": "^6.6"    
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     }
 }

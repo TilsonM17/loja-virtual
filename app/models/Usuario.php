@@ -2,6 +2,7 @@
 
 namespace App\models;
 
+use App\helpers\Func;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
@@ -45,6 +46,9 @@ class Usuario{
        */
       private string $purl;
 
+      public function GetId(){
+           return $this->id;
+      }
       
 
       public function SetNome($nome){
@@ -56,7 +60,13 @@ class Usuario{
       }
 
       public function SetEmail($e){
+       if(filter_var($e,FILTER_VALIDATE_EMAIL) !== false){
+          # esta bom
           $this->email = $e;
+       }else{
+            # esta mal
+            $this->email = "-1";
+       }   
      }
 
      public function GetEmail(){
@@ -65,7 +75,11 @@ class Usuario{
 
      public function SetSenha($s){
           $this->senha = password_hash($s,PASSWORD_BCRYPT);
-      }
+     }
+
+     public function SetSenhaNormal($s){
+          $this->senha = $s;
+     }
 
      public function GetSenha(){
           return $this->senha;
@@ -77,5 +91,31 @@ class Usuario{
 
      public function SetPurl($p){
           $this->purl = $p;
+     }
+
+     public function fazerLogin(\Doctrine\ORM\EntityManager $gestor){
+
+         $usuario = $gestor->getRepository(Usuario::class)->findOneBy([
+               'email' => $this->GetEmail()
+         ]);
+
+         if(!is_object($usuario)){
+               $_SESSION['erro'] = "Email ou senha incorretos";
+          }
+          # Se Encontrou um objecto tenho de verificar se a senha bate
+         if(!password_verify($this->GetSenha(),$usuario->senha)){
+               #Faça algo de errado
+               $_SESSION['_erro'] = "As suas credenciais não são válidas";
+
+               Func::redirect();
+               return;
+         }else{
+              #Criar a sessão do USuario
+               $_SESSION['login_web_id'] = $usuario->GetId();
+               Func::redirect();
+               return;
+         }
+
+
      }
 }

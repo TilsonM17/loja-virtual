@@ -29,7 +29,18 @@ class Main
 
     public function index()
     {
-        echo $this->plate->render('home');
+        //Buscar os livros na base de Dados e mandar os dados na View
+
+        $query = $this->gestor->createQuery('SELECT DISTINCT u.id_livro FROM App\models\Livro u ');
+        $users = $query->getResult(); // array of ForumUser objects with the avatar association loaded
+        Func::printArray($users);
+
+
+        $l = $this->gestor->getRepository(Livro::class)->findAll();
+        $livros = (new ImagenLivro)->mesclarImagemLivros($l, $this->gestor);
+
+        # Renderizar na View
+        echo $this->plate->render('home', ["livro" => $livros]);
     }
 
     public function nova_conta()
@@ -49,24 +60,24 @@ class Main
         }
 
         #Validar email
-        if(!Func::validarEmail($_POST['email'])){
+        if (!Func::validarEmail($_POST['email'])) {
             $_SESSION['_erro'] = "Email invalido";
             Func::redirect("nova_conta");
         }
-        
+
         #Saber se este usuario ja existe
-          $retorno = $this->gestor->getRepository(Usuario::class)->findOneBy([
-                'email' => $_POST['email']
-            ]);
-            if(is_object($retorno)){
-                if(empty($retorno->purl)){
-                    Func::redirect("confirmar_email");
-                    return;    
-                }
-                $_SESSION['_erro'] = "Email ja cadastrado";
-                Func::redirect("nova_conta");
+        $retorno = $this->gestor->getRepository(Usuario::class)->findOneBy([
+            'email' => $_POST['email']
+        ]);
+        if (is_object($retorno)) {
+            if (empty($retorno->purl)) {
+                Func::redirect("confirmar_email");
                 return;
             }
+            $_SESSION['_erro'] = "Email ja cadastrado";
+            Func::redirect("nova_conta");
+            return;
+        }
 
 
         #region Inserir na base de Dados
@@ -90,7 +101,7 @@ class Main
 
         #region Confirmar email
         $email = new Email(new PHPMailer(true));
- 
+
         $retorno = $email->EnviarEmail($params);
         #endregion 
 
@@ -100,7 +111,7 @@ class Main
         } else {
             #Armazenar em um cookie o email do usuario
             setcookie("email", $user->GetEmail(), time() + (86400 * 30), "/");
-          
+
             #Redirecionar para a sala de espera
             Func::redirect("confirmar_email");
         }
@@ -129,10 +140,31 @@ class Main
     /**
      * Renderiza a tela de login
      */
-    public function login(){
+    public function login()
+    {
         echo $this->plate->render("login");
     }
+    /**
+     * Fazer Login
+     */
+    public function login_submit()
+    {
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
 
+        if (empty($email) || empty($senha)) {
+            $_SESSION['_erro'] = "Os Campos não podem estar vazios";
+            Func::redirect("login");
+            return;
+        }
+
+        # Passou
+        $usuario = new Usuario;
+        $usuario->SetEmail($email);
+        $usuario->SetSenhaNormal($senha);
+
+        $usuario->fazerLogin($this->gestor);
+    }
     public function teste()
     {
 
@@ -172,48 +204,49 @@ class Main
         */
 
         #endregion
-#id_livro, nome_livro, autor, data_lancamento, preco, ativo, quantidade_estoque, created_at, update_at, deleted_at
+        #id_livro, nome_livro, autor, data_lancamento, preco, ativo, quantidade_estoque, created_at, update_at, deleted_at
 
-          $l = new Livro();
-          $variable = [
-              ["O Guia do codigo amador","Caelum","2012-04-23",10000,"Y",100],
-              ["Apreenda Python","TilsonM17","2015-04-23",15000,"Y",100,],
-              ["O amador","Caelum","2012-04-23",19000,"Y",100,],
+
+
+        $variable = [
+            ["O Guia do codigo amador", "Caelum", "2012-04-23", 10000, "Y", 100],
+            ["Apreenda Python", "TilsonM17", "2015-04-23", 15000, "Y", 100,],
+            /*["O amador","Caelum","2012-04-23",19000,"Y",100,],
               ["Via e obra de Neto","Caelum","2012-05-13",20000,"Y",100,],
               ["Velit fugiat non velit qui consectetur esse consequat sint.","Caelum","2019-09-03",5000,"Y",100,],
               ["Deserunt dolore minim non velit qui tempor cupidatat labore.","Caelum","2022-02-23",80000,"Y",100,]
+*/
+        ];
 
-          ];
 
-          Func::printArray($variable,$l);
-          foreach ($variable as $key => $value) {
-                $index = 1;
-                $l->SetNome($value[0]);
-                $l->SetAutor($value[1]);
-                $l->SetDataLancamento($value[2]);
-                $l->SetPreco($value[3]);
-                $l->SetAtivo($value[4]);
-                $l->SetQuantidadeEstoque($value[5]);
-                $l->SetCreatedAt(date("Y-m-d H:i:s"));
-                #Inserir O livro
-                $this->gestor->persist($l);
-                $this->gestor->flush();
+        foreach ($variable as $key => $value) {
+            $index = 1;
+            $l = new Livro();
+            $l->SetNome($value[0]);
+            $l->SetAutor($value[1]);
+            $l->SetDataLancamento($value[2]);
+            $l->SetPreco($value[3]);
+            $l->SetAtivo($value[4]);
+            $l->SetQuantidadeEstoque($value[5]);
+            $l->SetCreatedAt(date("Y-m-d H:i:s"));
+            #Inserir O livro
+            $this->gestor->persist($l);
+            $this->gestor->flush();
 
-                $i = new ImagenLivro();
+            $i = new ImagenLivro();
 
-                $i->SetIdLivro($l);
-                $i->SetImgNome("0{$index}.jpg");
-                #Inserir O Imagem
-                $this->gestor->persist($i);
-                $this->gestor->flush();
+            $i->SetIdLivro($l);
+            $i->SetImgNome("0{$index}.jpg");
+            $index + 1;
+            #Inserir O Imagem
+            $this->gestor->persist($i);
+            $this->gestor->flush();
+        }
 
-                $index++ ;
-          }
-      
-   
+        Func::printArray($variable, $l);
         echo "<br>";
 
-        echo "<br>","TERMINADO";
+        echo "<br>", "TERMINADO";
     }
 
 
