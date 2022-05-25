@@ -6,6 +6,7 @@ ini_set("display_errors",1);
 
 require_once '../vendor/autoload.php';
 
+use App\Middlewares\Teste;
 use Buki\Router\Router;
 
  $router = new Router(APP_ROTAS);
@@ -21,7 +22,12 @@ use Buki\Router\Router;
  $router->get("/login","Main@login");
  $router->post("/login_submit","Main@login_submit");
 
- $router->get('/a',"Main@teste");
+$router->group("/admin",function($router){
+   $router->get("/","Admin@index");
+});
+
+
+ $router->get('/a',"Main@teste",['before' => Teste::class]);
 
 
  $router->run();

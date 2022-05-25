@@ -29,7 +29,7 @@ namespace App\helpers;
             echo "<hr>";
         }
         echo "=========================================================================","<br>";
-        die("Esta Consumado");
+         die("Esta Consumado");
 
     }
 

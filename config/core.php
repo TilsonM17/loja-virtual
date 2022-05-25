@@ -17,12 +17,14 @@
 
  define("DATA_USER","tilsonm17");
 
+ define("DATA_NAME","db_loja");
+
  define("DATA_PASS","abc123");
   
  define("APP_LENGTH",5);
 
 
- define("IMG_SRC","assets/resource/upload/");
+ define("IMG_SRC","assets/resource/upload/livros/");
 
   # Require as configuraçes da Rotas
   require_once 'router.php';

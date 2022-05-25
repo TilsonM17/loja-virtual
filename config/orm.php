@@ -19,7 +19,7 @@ class GestorEntidade{
             'driver'   => 'pdo_mysql',
             'user'     => DATA_USER,
             'password' => DATA_PASS,
-            'dbname'   => 'db_loja',
+            'dbname'   => DATA_NAME,
         );
         
         $config = ORMSetup::createAnnotationMetadataConfiguration($paths, $isDevMode);
