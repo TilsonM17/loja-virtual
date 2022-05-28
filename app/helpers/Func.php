@@ -8,7 +8,7 @@ namespace App\helpers;
         echo APP_URL . $nome_rota;
     }
 
-    public static function urlReturrn(string $nome_rota){
+    public static function urlReturrn(string $nome_rota = ""){
         return APP_URL . $nome_rota;
     }
 

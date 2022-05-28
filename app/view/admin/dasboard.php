@@ -1,4 +1,4 @@
-<?php $this->layout('../_layout', ['title' => 'Area Admin']) ?>
+<?php $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
 
 <?= $this->insert('_navbar')?>

@@ -4,7 +4,7 @@ namespace App\controller;
 
 use League\Plates\Engine;
 use TilsonM17\config\GestorEntidade;
-
+use App\models\Admin as AdminModel;
 class Admin{
     
     private $plate;
@@ -18,5 +18,20 @@ class Admin{
 
      public function index(){
         echo $this->plate->render('dasboard');
+      }
+
+      /** Renderiza a tela de login */
+      public function login(){
+         echo $this->plate->render('login');
+      }
+      /** Valida o Login do Admin  */
+      public function login_admin_submit(){
+
+       (new AdminModel)->fazerLogin($this->gestor);
+      }
+      /**Renderiza a lista de livros ja cadastrados */
+
+      public function listarLivros(){
+        echo $this->plate->render('listar_livros');
       }
 }

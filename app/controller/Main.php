@@ -12,6 +12,8 @@ use League\Plates\Engine;
 use App\models\Usuario;
 use DateTime;
 use PHPMailer\PHPMailer\PHPMailer;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use TilsonM17\config\GestorEntidade;
 
 
@@ -32,10 +34,10 @@ class Main
     public function index()
     {
         //Buscar os livros na base de Dados e mandar os dados na View
-         $l = (new EasyPDO())->select("SELECT i.id_livro,nome_livro, autor,preco,quantidade_estoque,img_nome FROM tb_livro_img as i inner join tb_livro as l on l.id_livro = i.id_livro;");
+       #  $l = (new EasyPDO())->select("SELECT i.id_livro,nome_livro, autor,preco,quantidade_estoque,img_nome FROM tb_livro_img as i inner join tb_livro as l on l.id_livro = i.id_livro;");
      
         # Renderizar na View
-        echo $this->plate->render('home', ["livros" => $l]);
+        echo $this->plate->render('home', ["livros" =>  '']);
     }
 
     public function nova_conta()
@@ -46,8 +48,12 @@ class Main
     /**
      * Cadatrar novos usuarios na Loja
      */
-    public function nova_conta_submit()
+    public function nova_conta_submit(Request $request)
     {
+        
+
+
+        die();
         #Verifica se os imputs estão vazios
         if (empty($_POST['nome']) or empty($_POST['email']) or empty($_POST['senha'])) {
             $_SESSION['_erro'] = "Os Campos não pode estar vazio";
@@ -100,7 +106,8 @@ class Main
         $retorno = $email->EnviarEmail($params);
         #endregion 
 
-        #region Redirecionar para a sala de espera
+        #region Redirecionar para a sala de espera se verdadeiro
+        # vai pra
         if ($retorno != true) {
             Func::redirect();
         } else {
@@ -162,7 +169,6 @@ class Main
     }
     public function teste()
     {
-
         #region Teste
 
 

@@ -1,3 +1,5 @@
+<?php use App\helpers\Func; ?>
+
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><?=APP_NAME?></a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse"
@@ -7,7 +9,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+        <a class="nav-link" href="<?php Func::url("admin/logout")?>">Sign out</a>
       </li>
     </ul>
   </nav>
@@ -26,7 +28,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <span data-feather="file"></span>
-                Orders
+                Livros
               </a>
             </li>
             <li class="nav-item">

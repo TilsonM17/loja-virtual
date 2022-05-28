@@ -4,7 +4,8 @@
  * Arquivo de configuração sobre o ambiente geral de desenvolvimento.
  * Nome do projecto,versão
  */
-    #Inicia a sessao
+    
+#Inicia a sessao
  session_start();
 
  define("APP_URL","http://localhost:8000/");

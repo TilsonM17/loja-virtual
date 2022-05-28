@@ -6,8 +6,12 @@ ini_set("display_errors",1);
 
 require_once '../vendor/autoload.php';
 
-use App\Middlewares\Teste;
+use App\helpers\EasyPDO;
+use App\helpers\Func;
+use App\Middlewares\AuthAdmin;
 use Buki\Router\Router;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
  $router = new Router(APP_ROTAS);
  
@@ -19,16 +23,32 @@ use Buki\Router\Router;
  $router->get("/erro_envio_email","Main@erro_envio_email");
  $router->get("/validar_email_submit/:string","Main@validar_email_submit");
 
+ # Areas de login Normal
  $router->get("/login","Main@login");
  $router->post("/login_submit","Main@login_submit");
+# Are de Login Administrativa
+$router->get("/admin/login","Admin@login",['after'=> ValidateSessionAdmin::class]);
+$router->post("/admin/login_admin_submit","Admin@login_admin_submit");
+
 
 $router->group("/admin",function($router){
-   $router->get("/","Admin@index");
-});
+   $router->get("/home","Admin@index");
+   $router->get("/home/livros","Admin@listarLivros");
+   
+},['before' => AuthAdmin::class]);
 
 
- $router->get('/a',"Main@teste",['before' => Teste::class]);
+ $router->get('/a',function(){
+    
+   Func::printArray($_SESSION);
+   
+ });
 
+ #Caso haja paginas não encontradas
+ $router->notFound(function(Request $request, Response $response) {
+      $response->setContent('<center><h1>Página não encontrada</h1></center>');
+      return $response;
+ });
 
  $router->run();
  

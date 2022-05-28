@@ -2,14 +2,12 @@
 
 use App\helpers\Func;
 
-$this->layout("_layout", ["title" => "Fazer Login"]) ?>
-
-<?= $this->insert('_navbar') ?>
+ $this->layout("_layout",['title' => "Login como Admin"]);?>
 
 <section class="container">
     <div class="row">
         <div class="col-md-12 mt-5">
-            <p class="text-center h3">Login</p>
+            <p class="text-center h3">Login Administrativo</p>
         </div>
         <hr>
         <?php if (isset($_SESSION['_erro'])) : ?>
@@ -21,7 +19,7 @@ $this->layout("_layout", ["title" => "Fazer Login"]) ?>
 
         <div class="col-md-8 offset-md-4 my-3">
 
-            <form action="<?php Func::url('login_submit') ?>" method="post">
+            <form action="<?php Func::url('admin/login_admin_submit') ?>" method="post">
                 <div class="col-md-6 my-4">
                     <label for="Email">Email:</label>
 
@@ -40,7 +38,7 @@ $this->layout("_layout", ["title" => "Fazer Login"]) ?>
                 </div>
 
                 <div class="col-md-6 my-4">
-                    <input type="submit" :disabled="botao" class="btn btn-outline-primary" value="Cadastrar">
+                    <input type="submit" :disabled="botao" class="btn btn-outline-primary" value="Entrar    ">
                 </div>
             </form>
 
@@ -50,15 +48,9 @@ $this->layout("_layout", ["title" => "Fazer Login"]) ?>
 </section>
 
 
-<?= $this->insert('_footer') ?>
-
-
-
-
-
 <?php $this->start('scripts') ?>
 
-<script src="assets/js/vue.min.js"></script>
+<script src="../assets/js/vue.min.js"></script>
 <script>
     // Validar o front-end de cadastro
     new Vue({
