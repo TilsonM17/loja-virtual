@@ -1,4 +1,4 @@
-
+<?php use App\helpers\Func; ?>
 <!doctype html>
 <html lang="en">
 
@@ -12,10 +12,10 @@
 
   <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/dashboard/">
 
-  <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/fontawesome/all.css">
-    <script src="../assets/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="../assets/fontawesome/all.min.js"></script>
+  <link rel="stylesheet" href="<?php Func::url("assets/bootstrap/css/bootstrap.min.css") ?>">
+    <link rel="stylesheet" href="<?php Func::url("assets/fontawesome/all.css")?>">
+    <script src="<?php Func::url("assets/bootstrap/js/bootstrap.bundle.js")?>"> </script>
+    <script src="<?php Func::url("assets/fontawesome/all.min.js")?>"> </script>
 
   <style>
     .bd-placeholder-img {

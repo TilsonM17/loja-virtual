@@ -3,6 +3,7 @@
 namespace App\controller;
 
 use League\Plates\Engine;
+use App\helpers\Func;
 use TilsonM17\config\GestorEntidade;
 use App\models\Admin as AdminModel;
 class Admin{
@@ -33,5 +34,11 @@ class Admin{
 
       public function listarLivros(){
         echo $this->plate->render('listar_livros');
+      }
+
+      public function logout(){
+        session_destroy();
+        session_unset();
+        Func::redirect("/login");
       }
 }

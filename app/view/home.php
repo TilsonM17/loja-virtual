@@ -13,12 +13,12 @@ use App\helpers\Func;
         </div>
 
         <!---------------------------------------------------------------->
-        <?php  foreach ($livros as $key => $livro): ?>
+       <?php /* foreach ($livros as $key => $livro): ?>
          <div class="col-md-4">
              <h2><?= $livro['nome_livro']?></h2>
              <img src="<?= IMG_SRC."".$livro["img_nome"]?>" class="img-fluid img-thumbnail" width="350" height="350" alt="Imagem do produto">
         </div>
-        <?php endforeach; ?>
+        <?php endforeach; */?>
 
         <!---------------------------------------------------------------->
        

@@ -33,7 +33,8 @@ $router->post("/admin/login_admin_submit","Admin@login_admin_submit");
 
 $router->group("/admin",function($router){
    $router->get("/home","Admin@index");
-   $router->get("/home/livros","Admin@listarLivros");
+   $router->get("/logout","Admin@logout");
+   $router->get("/livros","Admin@listarLivros");
    
 },['before' => AuthAdmin::class]);
 
