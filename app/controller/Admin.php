@@ -6,6 +6,9 @@ use League\Plates\Engine;
 use App\helpers\Func;
 use TilsonM17\config\GestorEntidade;
 use App\models\Admin as AdminModel;
+use App\models\Autor;
+use App\models\Livro;
+
 class Admin{
     
     private $plate;
@@ -33,7 +36,16 @@ class Admin{
       /**Renderiza a lista de livros ja cadastrados */
 
       public function listarLivros(){
-        echo $this->plate->render('listar_livros');
+       $resultado = $this->gestor->getRepository(Livro::class)->findAll();
+
+        echo $this->plate->render('listar_livros',['livros' => $resultado] );
+      }
+      /**Renderiza a lista de autores ja cadastrados */
+
+      public function listarAutores(){
+       $resultado = $this->gestor->getRepository(Autor::class)->findAll();
+
+        echo $this->plate->render('listar_autores',['autores' => $resultado] );
       }
 
       public function logout(){

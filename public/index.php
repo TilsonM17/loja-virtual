@@ -35,6 +35,7 @@ $router->group("/admin",function($router){
    $router->get("/home","Admin@index");
    $router->get("/logout","Admin@logout");
    $router->get("/livros","Admin@listarLivros");
+   $router->get("/autor","Admin@listarAutores");
    
 },['before' => AuthAdmin::class]);
 

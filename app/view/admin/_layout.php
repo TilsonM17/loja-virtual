@@ -14,7 +14,8 @@
 
   <link rel="stylesheet" href="<?php Func::url("assets/bootstrap/css/bootstrap.min.css") ?>">
     <link rel="stylesheet" href="<?php Func::url("assets/fontawesome/all.css")?>">
-    <script src="<?php Func::url("assets/bootstrap/js/bootstrap.bundle.js")?>"> </script>
+    <script src="<?php Func::url("assets/bootstrap/js/bootstrap.bundle.min.js")?>"> </script>
+    <script src="<?php Func::url("assets/bootstrap/js/bootstrap.min.js")?>"> </script>
     <script src="<?php Func::url("assets/fontawesome/all.min.js")?>"> </script>
 
   <style>

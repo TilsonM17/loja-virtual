@@ -33,14 +33,14 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <span data-feather="shopping-cart"></span>
-                Products
+                <i class="fa-solid fa-user-pen"></i>
+                Editoras
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="<?php Func::url("admin/autor") ?>">
                 <span data-feather="users"></span>
-                Customers
+                Autores
               </a>
             </li>
             <li class="nav-item">

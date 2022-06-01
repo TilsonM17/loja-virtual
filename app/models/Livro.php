@@ -28,10 +28,20 @@ class Livro{
          * @Column(name="`nome_livro`",type="string")
          */
         private $nome_livro;
+
         /**
-         * @Column(name="`autor`",type="string")
+         * @Column(name="`descricao`",type="string")
+         */
+        private $assunto;
+
+        /**
+         * @Column(name="`id_autor`",type="int")
          */
         private $autor;
+         /**
+         * @Column(name="`id_editora`",type="int")
+         */
+        private $editora;
         /**
          * @Column(name="`data_lancamento`")
          */

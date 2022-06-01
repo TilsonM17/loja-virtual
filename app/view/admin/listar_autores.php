@@ -21,8 +21,8 @@
 
   <h2></h2>
   <div class="table-responsive">
-    <?php if (count($livros) == 0) : ?>
-      <p class="text-center h2">Não tem livros cadastrados.</p>
+    <?php if (count($autores) == 0) : ?>
+      <p class="text-center h2">Não tem Autores cadastrados.</p>
       <p class="text-center h3">Deseja adiçionar?
         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"class="btn btn-outline-dark">
           <i class="fa fa-plus" aria-hidden="true"></i>
@@ -66,7 +66,12 @@
       <div class="modal-body">
         <form action="#" method="post">
           <div class="my-3">
-             
+             <label for="">Primeiro Nome</label>
+             <input type="text" name="" class="form-controll" id="">
+          </div>
+          <div class="my-3">
+             <label for="">Primeiro Nome</label>
+             <input type="text" name="" class="form-controll" id="">
           </div>
         </form>
       </div>
