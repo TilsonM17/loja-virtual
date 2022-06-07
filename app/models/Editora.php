@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\models;
 
 use App\helpers\Func;
@@ -12,59 +13,52 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Entity
- * @Table(name="tb_autor")
+ * @Table(name="tb_editora")
  */
 
-class Autor
+class Editora
 {
 
     /**
      * @Id
      * @GeneratedValue
-     * @Column(name="`id_autor`",type="integer")
+     * @Column(name="`id_editora`",type="integer")
      */
-    private int $id_autor;
+    private int $id_editora;
+
     /**
-     * @Column(name="`nome_autor`",type="string")
+     * @Column(name="`nome_editora`",type="string")
      */
-    private string $nome_autor;
-      /**
-      * @Column(name="`sobre_nome`",type="string")
-      */
-    private $sobre_nome;
+    private string $nome_editora;
+    
     
     public function GetId(){
-      return $this->id_autor;
+      return $this->id_editora;
     }
-    public function GetNomeAutor()
+    
+    public function GetNomeEditora()
     {
-        return $this->nome_autor;
+        return $this->nome_editora;
     }
 
-    public function GetSobreNome()
-    {
-        return $this->sobre_nome;
-    }
 
-    public function cadastrarAutor(Request $request, $gestor){
+    public function cadastrarEditora(Request $request, $gestor){
 
-         if(empty($request->request->get("segundo_nome")) || empty($request->request->get("primeiro_nome"))){
+         if(empty($request->request->get("nome") )){
                 $_SESSION['_erro'] = "Estes campos não podem estar vazios";
-                Func::redirect("admin/autor");
+                Func::redirect("admin/editora");
                 return;
            }
               # --------------------------------------------------------------
-             $n1 = htmlspecialchars($request->request->get("primeiro_nome"));
-             $n2 = htmlspecialchars($request->request->get("segundo_nome"));
            
-           $this->nome_autor = $n1;
-           $this->sobre_nome = $n2;
+           $this->nome_editora= htmlspecialchars($request->request->get("nome"));
+      
            $gestor->persist($this);
            $gestor->flush();
          
 
            $_SESSION['_sucess'] = "Cadastro feito com sucesso!";
-           Func::redirect();
+           Func::redirect("admin/editora");
 
     }
 

@@ -32,7 +32,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="<?php Func::url("admin/editora") ?>">
                 <i class="fa-solid fa-user-pen"></i>
                 Editoras
               </a>

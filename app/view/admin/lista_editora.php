@@ -8,7 +8,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Gestão de Autores.</h1>
+    <h1 class="h2">Gestão das Editoras.</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
       <div class="btn-group me-2">
         <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -44,8 +44,8 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
     <?php endif; ?>
 
 
-    <?php if (count($autores) == 0) : ?>
-      <p class="text-center h2">Não tem Autores cadastrados.</p>
+    <?php if (count($editoras) == 0) : ?>
+      <p class="text-center h2">Não tem Editoras Cadastradas no Sistema.</p>
       <p class="text-center h3">Deseja adiçionar?
 
         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-dark">
@@ -61,31 +61,30 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Primeiro Nome</th>
-            <th scope="col">Segundo Nome</th>
+            <th scope="col">Nome Editora</th>
             <th scope="col">Update</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>
 
         <tbody>
-          <?php foreach ($autores as $autor) : ?>
+
+          <?php foreach ($editoras as $editora) : ?>
             <tr>
-              <td><?= $autor->GetId() ?></td>
-              <td><?= $autor->GetNomeAutor() ?></td>
-              <td><?= $autor->GetSobreNome() ?></td>
+              <td><?= $editora->GetId() ?></td>
+              <td><?= $editora->GetNomeEditora() ?></td>
               <!---data-bs-toggle="modal" data-bs-target="#atualisar"-->
               <td>
 
 
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#actualisar" @click="Atualisar(<?= $autor->GetId() ?>)">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#actualisar" @click="Atualisar(<?= $editora->GetId() ?>)">
                   <i class="fa fa-pencil" aria-hidden="true"> </i>
                 </button>
 
 
               </td>
               <td>
-                <button class="btn btn-outline-danger" @click="Capturar(<?= $autor->GetId() ?>)" data-bs-toggle="modal" data-bs-target="#apagar">
+                <button class="btn btn-outline-danger" @click="Capturar(<?= $editora->GetId() ?>)" data-bs-toggle="modal" data-bs-target="#apagar">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
               </td>
@@ -99,7 +98,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
       <div class="row my-3">
         <div class="col-md-4">
-          <?php echo "Total de registros: <strong>" . count($autores) . "</strong>"; ?>
+          <?php echo "Total de registros: <strong>" . count($editoras) . "</strong>"; ?>
         </div>
         <div class="col-md-2 offset-6">
           <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-outline-dark">
@@ -121,7 +120,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">Actualisar Autor.</h5>
+        <h5 class="modal-title text-center" id="exampleModalLabel">Actualisar editora.</h5>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -129,11 +128,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
         <form :action="rota" method="post">
           <div class="my-3">
             <label for="">Primeiro Nome</label>
-            <input type="text" name="primeiro_nome" v-model="nome_1" class="form-control" id="">
-          </div>
-          <div class="my-3">
-            <label for="">Segundo Nome</label>
-            <input type="text" name="segundo_nome" v-model="nome_2" class="form-control" id="">
+            <input type="text" name="primeiro_nome" v-model="nome" class="form-control" id="">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -162,27 +157,26 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">Cadastro de novos Autores</h5>
+        <h5 class="modal-title text-center" id="exampleModalLabel">Cadastro de novos editora</h5>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="<?php Func::url('admin/autor/cadastrar') ?>" method="post">
+        <form action="<?php Func::url('admin/editora/cadastrar') ?>" method="post">
           <div class="my-3">
-            <label for="">Primeiro Nome</label>
-            <input type="text" name="primeiro_nome" v-model="nome_1" class="form-control" id="">
+            <label for="">Nome da Editora</label>
+            <input type="text" placeholder="Digite o nome de uma editora valida" name="nome" v-model="nome" class="form-control" id="">
           </div>
-          <div class="my-3">
-            <label for="">Segundo Nome</label>
-            <input type="text" name="segundo_nome" v-model="nome_2" class="form-control" id="">
-          </div>
+
           <div class="modal-footer">
+
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               <i class="fa fa-close" aria-hidden="true"></i> Cancelar
             </button>
             <button type="submit" :disabled="btn" class="btn btn-outline-primary">
               <i class="fa-solid fa-chevron-right"></i> Cadastrar.
             </button>
+
           </div>
         </form>
       </div>
@@ -199,7 +193,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="apagarModalLabel">Deseja Apagar este Autor?</h5>
+        <h5 class="modal-title text-center" id="apagarModalLabel">Deseja Apagar este Registro?</h5>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
@@ -233,13 +227,14 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 <script src="<?php Func::url('assets/js/axios.js') ?>"></script>
 
 <script>
+
   Vue.config.devtools = true
+
   new Vue({
     el: '#app',
     data() {
       return {
-        nome_1: '',
-        nome_2: '',
+        nome: '',
         rota:'',
         btn: true,
         id_valor: null,
@@ -248,19 +243,12 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
     },
     /**Colocar waths não metodo para validar os campos de entrada */
     watch: {
-      nome_1: function() {
-        if (this.nome_1.length > 0 && this.nome_2.length > 0) {
-          this.btn = false;
-        } else {
-          this.btn = true;
-        }
-      },
-      nome_2: function() {
-        if (this.nome_2.length > 0 && this.nome_1.length > 0) {
-          this.btn = false;
-        } else {
-          this.btn = true;
-        }
+      nome: function() {
+         if (this.nome.length > 0) {
+           this.btn = false;
+         }else{
+           this.btn = true;
+         }
       }
     },
     methods: {
@@ -271,18 +259,18 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
       Apagar() {
 
         console.log(this.id_valor);
-        window.location.href = "<?php Func::url('admin/autor/apagar/') ?>" + this.id_valor;
+        window.location.href = "<?php Func::url('admin/editora/apagar/') ?>" + this.id_valor;
       },
       Atualisar(id) {
 
         vue = this;
 
-        axios.get('/api/autor/' + id)
+        axios.get('/api/editora$editora/' + id)
           .then(function(response) {
             //console.log();
-            vue.nome_1 = response.data.DATA[0].nome_autor;
-            vue.nome_2 = response.data.DATA[0].sobre_nome;
-            vue.rota = "<?php Func::url("admin/autor/atualizar/")?>" + response.data.DATA[0].id_autor;
+            //vue.nome_1 = response.data.DATA[0].nome_editora$editora;
+            //vue.nome_2 = response.data.DATA[0].sobre_nome;
+          //  vue.rota = "<?php Func::url("admin/editora/atualizar/")?>" + response.data.DATA[0].id_editora$editora;
           })
           .catch(function(error) {
             // handle error

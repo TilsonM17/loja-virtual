@@ -12,6 +12,10 @@ namespace App\helpers;
         return APP_URL . $nome_rota;
     }
 
+    public static function header():void{
+        header('Content-Type: application/json');
+    }
+
     /**
      * Faz um print_r em 1 ou 2 arrays
      */

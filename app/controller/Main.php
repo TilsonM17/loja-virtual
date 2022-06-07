@@ -178,7 +178,7 @@ class Main
        $u->SetNome("Eduardo Brandão");
        $u->SetEmail("brandao@gmail.com");
        $u->SetSenha("#imports;");
- 
+
        # Avisar ao Gestor que uma nova classe vai ser inserida na DB
         $this->gestor->persist($u);
         $this->gestor->flush();

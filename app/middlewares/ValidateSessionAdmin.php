@@ -12,10 +12,13 @@ class ValidateSessionAdmin extends Middleware
     public function handle()
     {
         if (isset($_SESSION['login_web_id_admin'])) {
-              Func::redirect("admin/home");
+              Func::redirect("home");
             return true;
         }
-            return false;
+
+        
+        return true;
+           
 
     }
 }

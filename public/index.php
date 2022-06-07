@@ -27,17 +27,32 @@ use Symfony\Component\HttpFoundation\Response;
  $router->get("/login","Main@login");
  $router->post("/login_submit","Main@login_submit");
 # Are de Login Administrativa
-$router->get("/admin/login","Admin@login",['after'=> ValidateSessionAdmin::class]);
-$router->post("/admin/login_admin_submit","Admin@login_admin_submit");
+ $router->get("/admin/login","Admin@login",['before'=> ValidateSessionAdmin::class]);
+ $router->post("/admin/login_admin_submit","Admin@login_admin_submit");
 
 
 $router->group("/admin",function($router){
    $router->get("/home","Admin@index");
    $router->get("/logout","Admin@logout");
    $router->get("/livros","Admin@listarLivros");
+   $router->get("/editora","Admin@listarEditoras");
    $router->get("/autor","Admin@listarAutores");
+   $router->get("/autor/apagar/:id","Admin@apagarAutor");
+   #--------------------------------------------------------------------
+   $router->post("/autor/cadastrar","Admin@cadastrarAutor");
+   $router->post("/editora/cadastrar","Admin@cadastrarEditora");
+   
+   $router->post("/autor/atualizar/:id","Admin@atualizarAutor");
+   #--------------------------------------------------------------------
    
 },['before' => AuthAdmin::class]);
+
+
+# Criar um grupo para api de autores, livros e etc
+$router->group("/api",function($router){
+     $router->get("/autores","Api@listarAutores");
+     $router->get("/autor/:id","Api@listarAutor");
+ });
 
 
  $router->get('/a',function(){
@@ -45,6 +60,7 @@ $router->group("/admin",function($router){
    Func::printArray($_SESSION);
    
  });
+
 
  #Caso haja paginas não encontradas
  $router->notFound(function(Request $request, Response $response) {
