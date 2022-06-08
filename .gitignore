@@ -1,5 +1,4 @@
 vendor/
-
 .vscode/
-.Material/
-teste
+.Material/notas.txt
+test
