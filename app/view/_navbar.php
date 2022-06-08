@@ -12,24 +12,31 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
-            <?php if(!isset($_SESSION['id_usuario'])):?>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Livros</a>
+            </li>
+
+            
+            <?php if(!isset($_SESSION['login_web_id'])):?>
 
             <li class="nav-item">
               <a class="nav-link" href="<?php Func::url('nova_conta') ?>">Criar Conta</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link">Login</a>
+              <a class="nav-link" href="<?php Func::url('login') ?>">Login</a>
             </li>
 
             <?php else: ?>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Produtos</a>
+              <a class="nav-link" href="#">Notificações</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link"></a>
+              <a class="nav-link">Minha Conta</a>
             </li>
 
             <li class="nav-item">

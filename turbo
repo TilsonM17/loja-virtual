@@ -1,3 +1,4 @@
 <?php
-
-exec("php -S localhost:8000 -t public");
+    
+    exec("php -S localhost:8000 -t public");
+    
