@@ -2,3 +2,4 @@ vendor/
 .vscode/
 .Material/notas.txt
 test
+email_config.php

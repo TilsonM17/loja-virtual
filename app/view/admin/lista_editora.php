@@ -120,7 +120,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">Actualisar editora.</h5>
+        <h5 class="modal-title text-center" id="exampleModalLabel">Actualisar Editora.</h5>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -128,7 +128,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
         <form :action="rota" method="post">
           <div class="my-3">
             <label for="">Primeiro Nome</label>
-            <input type="text" name="primeiro_nome" v-model="nome" class="form-control" id="">
+            <input type="text" name="nome" v-model="nome" class="form-control" id="">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -255,6 +255,8 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
       Capturar(id) {
         //Capturar o id do botão
         this.id_valor = id
+        console.log(this.id_valor)
+
       },
       Apagar() {
 
@@ -265,12 +267,15 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
         vue = this;
 
-        axios.get('/api/editora$editora/' + id)
+        axios.get('/api/editora/' + id)
           .then(function(response) {
-            //console.log();
-            //vue.nome_1 = response.data.DATA[0].nome_editora$editora;
-            //vue.nome_2 = response.data.DATA[0].sobre_nome;
-          //  vue.rota = "<?php Func::url("admin/editora/atualizar/")?>" + response.data.DATA[0].id_editora$editora;
+
+            console.log(response);
+
+            vue.nome = response.data.DATA[0].nome_editora;
+            
+            vue.rota = "<?php Func::url("admin/editora/atualizar/")?>" + response.data.DATA[0].id_editora;
+            
           })
           .catch(function(error) {
             // handle error

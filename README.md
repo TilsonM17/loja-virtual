@@ -9,7 +9,7 @@ Durante o desenvolvimento usei os seguintes ***packages*** :
  - [league/plates]() - Para o Template Engine
  - [izniburak/router]() - Para um sistema de rotas.
  - [doctrine/orm]() - ORM
- - [phpmailer/phpmailer]() -  Desparo e envio de Email
+ - [phpmailer/phpmailer]() -  Disparo e envio de Email
 
  - [phpunit/phpunit]() -  Testes Unitarios
 

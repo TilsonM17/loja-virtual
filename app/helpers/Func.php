@@ -41,6 +41,11 @@ namespace App\helpers;
         header("Location: {$rota_name}");
     }
 
+    public static function redirectAdmin(string $rota_name = "home"){
+        header("Location: {$rota_name}");
+    } 
+
+
     public static function purl(int $tamanho = APP_LENGTH):string{
         $str = "ABCDEFGHIJKMNOPQRSTUVXYZaabcdefghijklmnopqrstuvxvyz123456789";
         return substr( str_shuffle($str),0,$tamanho);

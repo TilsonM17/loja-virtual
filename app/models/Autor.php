@@ -50,7 +50,7 @@ class Autor
 
          if(empty($request->request->get("segundo_nome")) || empty($request->request->get("primeiro_nome"))){
                 $_SESSION['_erro'] = "Estes campos não podem estar vazios";
-                Func::redirect("admin/autor");
+                Func::redirectAdmin("autor");
                 return;
            }
               # --------------------------------------------------------------
@@ -64,7 +64,7 @@ class Autor
          
 
            $_SESSION['_sucess'] = "Cadastro feito com sucesso!";
-           Func::redirect();
+           Func::redirectAdmin("autor");
 
     }
 
@@ -73,7 +73,7 @@ class Autor
         $gestor->remove($autor);
         $gestor->flush();
         $_SESSION['_sucess'] = "Autor apagado com sucesso!";
-        Func::redirect();
+        Func::redirectAdmin("autor");
 
     }
 
@@ -85,6 +85,6 @@ class Autor
       $gestor->persist($autor);
       $gestor->flush();
       $_SESSION['_sucess'] = "Autor atualizado com sucesso!";
-      Func::redirect();
+      Func::redirectAdmin("autor");
     }
 }

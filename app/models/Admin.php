@@ -97,7 +97,7 @@ class Admin{
 
          if(!is_object($usuario)){
                $_SESSION['_erro'] = "Email ou senha incorretos";
-               Func::redirect("/admin/login");
+               Func::redirectAdmin("login");
                return;
           }
           # Se Encontrou um objecto tenho de verificar se a senha bate
@@ -105,12 +105,12 @@ class Admin{
                #Faça algo de errado
                $_SESSION['_erro'] = "As suas credenciais não são válidas";
 
-               Func::redirect("/admin/login");
+               Func::redirectAdmin("login");
                return;
          }else{
               #Criar a sessão do USuario
                $_SESSION['login_web_id_admin'] = $usuario->GetId();
-               Func::redirect("/admin/home");
+               Func::redirectAdmin();
                return;
          }
 
