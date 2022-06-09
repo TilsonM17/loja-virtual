@@ -38,9 +38,12 @@ $router->group("/admin",function($router){
    $router->get("/editora","Admin@listarEditoras");
    $router->get("/autor","Admin@listarAutores");
    $router->get("/autor/apagar/:id","Admin@apagarAutor");
+   $router->get("/editora/apagar/:id","Admin@apagarEditora");
+   $router->get("/cadastrar_livros","Admin@cadastrarLivrosLayout");
    #--------------------------------------------------------------------
    $router->post("/autor/cadastrar","Admin@cadastrarAutor");
    $router->post("/editora/cadastrar","Admin@cadastrarEditora");
+   $router->post("/editora/atualizar/:id","Admin@actualisarEditora");
    
    $router->post("/autor/atualizar/:id","Admin@atualizarAutor");
    #--------------------------------------------------------------------
@@ -52,13 +55,13 @@ $router->group("/admin",function($router){
 $router->group("/api",function($router){
      $router->get("/autores","Api@listarAutores");
      $router->get("/autor/:id","Api@listarAutor");
+     $router->get("/editoras","Api@listarEditoras");
+     $router->get("/editora/:id","Api@listarEditora");
  });
 
 
- $router->get('/a',function(){
-    
-   Func::printArray($_SESSION);
-   
+ $router->get('/a',function(){   
+      echo "";
  });
 
 

@@ -73,13 +73,33 @@ class Admin{
         echo $this->plate->render("lista_editora",['editoras' => $resultado]);
       }
 
+      public function cadastrarLivrosLayout(){
+
+        $autor = $this->gestor->getRepository(Autor::class)->findAll();
+
+        $editora = $this->gestor->getRepository(Editora::class)->findAll();
+
+        echo $this->plate->render("cadastrar_livro",[
+          'autores' => $autor,
+          'editoras' => $editora
+        ]);
+
+      }
+
       public function cadastrarEditora(){
         (new Editora)->cadastrarEditora(Request::createFromGlobals(),$this->gestor);
-      } 
+      }
+      
+      public function apagarEditora($id){
+        (new Editora)->apagarEditora($this->gestor,$id);
+      }
+    
+      public function actualisarEditora($id){
+        (new Editora)->atualizarEditora(Request::createFromGlobals(),$this->gestor,$id);
+      }
 
       public function logout(){
-        session_destroy();
-        session_unset();
-        Func::redirect("/login");
+        unset($_SESSION['login_web_id_admin']);
+        Func::redirectAdmin();
       }
 }

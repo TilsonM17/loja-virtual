@@ -46,7 +46,7 @@ class Editora
 
          if(empty($request->request->get("nome") )){
                 $_SESSION['_erro'] = "Estes campos não podem estar vazios";
-                Func::redirect("admin/editora");
+                Func::redirectAdmin("editora");
                 return;
            }
               # --------------------------------------------------------------
@@ -58,27 +58,29 @@ class Editora
          
 
            $_SESSION['_sucess'] = "Cadastro feito com sucesso!";
-           Func::redirect("admin/editora");
+           Func::redirectAdmin("editora");
 
     }
 
-    public function apagarAutor(Request $request, $gestor,$id){
-        $autor = $gestor->getRepository(Autor::class)->find($id);
-        $gestor->remove($autor);
+    public function apagarEditora($gestor,$id){
+
+        $editora = $gestor->getRepository(Editora::class)->find($id);
+        $gestor->remove($editora);
         $gestor->flush();
-        $_SESSION['_sucess'] = "Autor apagado com sucesso!";
-        Func::redirect();
+        $_SESSION['_sucess'] = "Editora Eliminada com sucesso!";
+        Func::redirectAdmin("editora");
 
     }
 
-    public function atualizarAutor(Request $request, $gestor,$id){
-      # Actualiza o autor
-      $autor = $gestor->getRepository(Autor::class)->find($id);
-      $autor->nome_autor = htmlspecialchars($request->request->get("primeiro_nome"));
-      $autor->sobre_nome = htmlspecialchars($request->request->get("segundo_nome"));
-      $gestor->persist($autor);
+    public function atualizarEditora(Request $request, $gestor,$id){
+      # Actualiza o editora
+      $editora = $gestor->getRepository(Editora::class)->find($id);
+      $editora->nome_editora = htmlspecialchars($request->request->get("nome"));
+      $gestor->persist($editora);
       $gestor->flush();
-      $_SESSION['_sucess'] = "Autor atualizado com sucesso!";
-      Func::redirect();
+      $_SESSION['_sucess'] = "Editora atualizado com sucesso!";
+      Func::redirectAdmin();
+      sleep(3);
+      Func::redirectAdmin("editora");
     }
 }
