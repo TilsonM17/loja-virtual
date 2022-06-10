@@ -54,10 +54,7 @@ class Livro{
          * @Column(name="`ativo`")
          */
         private $ativo;
-        /**
-         * @Column(name="`quantidade_estoque`",type="integer")
-         */
-        private $quantidade_estoque;
+        
         private $created_at;
         private $update_at;
         private $deleted_at;

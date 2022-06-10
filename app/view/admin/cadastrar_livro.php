@@ -76,17 +76,25 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
-                        
+
                 <div class="my-2">
-               <p> 
-                 {{categoria}}
-               </p> 
+                    <button type="button" class="btn btn-primary my-2" v-for="cat in categoria">
+                        {{cat}}
+                        <span @click="TrashCategoria(cat)" class="badge bg-secondary">
+                            <span aria-hidden="true">&times;</span></span>
+                    </button>
+
                 </div>
 
-                <div class="my-2 col-md-12">
-                    
+                <div class="my-2 col-md-6">
+
                     <label for="">Categoria</label>
-                    <input type="text" name="categoria" @keyup.enter = "AddCategoria" v-model="categoria" class="form-control" placeholder="Categoria" id="">
+                    <input type="text" name="categoria" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="">
+                </div>
+
+                <div class="my-2 col-md-6">
+                    <label for="">Idade Minima</label>
+                    <input type="number" name="idade_minima" class="form-control" placeholder="Aplicar Desconto" id="">
                 </div>
             </div>
         </fieldset>
@@ -128,13 +136,28 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
     Vue.config.devtools = true;
 
     new Vue({
-        el:"#app",
-        data(){
-            return{
-                categoria:[]
+        el: "#app",
+        data() {
+            return {
+              
+                cat_txt: '',
+                categoria: []
             }
-        },methods:{
-           
+        },
+        methods: {
+            AddCategoria() {
+                if (this.cat_txt.length == 0 || this.categoria.length == 3) {
+                    return
+                }
+
+                this.categoria.push(this.cat_txt);
+                this.cat_txt = "";
+
+            },
+            TrashCategoria(cat) {
+                var index = this.categoria.indexOf(cat)
+                this.categoria.splice(index,1);
+            }
         }
     });
 </script>
