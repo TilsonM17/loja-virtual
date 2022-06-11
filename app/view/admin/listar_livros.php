@@ -2,7 +2,7 @@
 
 use App\helpers\Func;
 
- $this->layout('_layout', ['title' => 'Area Admin']) ?>
+$this->layout('_layout', ['title' => 'Area Admin']) ?>
 
 <?= $this->insert("_navbar"); ?>
 
@@ -21,19 +21,35 @@ use App\helpers\Func;
     </div>
   </div>
 
-
-
-  <h2></h2>
   <div class="table-responsive">
+    <?php if (isset($_SESSION['_erro'])) : ?>
+      <div class="alert alert-danger">
+        <p class="text-center h6">
+          <?= $_SESSION['_erro'] ?>
+        </p>
+        <?php unset($_SESSION['_erro']) ?>
+      </div>
+    <?php elseif (isset($_SESSION['_sucess'])) : ?>
+      <div class="alert alert-success">
+        <p class="text-center h6">
+          <?= $_SESSION['_sucess'] ?>
+        </p>
+        <?php unset($_SESSION['_sucess']) ?>
+      </div>
+    <?php endif; ?>
+
+
+
+
     <?php if (count($livros) == 0) : ?>
       <p class="text-center h2">Não tem livros cadastrados.</p>
       <p class="text-center h3">Deseja adiçionar?
-        <a href="<?php Func::url("admin/cadastrar_livros")?>"  class="btn btn-outline-dark">
+        <a href="<?php Func::url("admin/cadastrar_livros") ?>" class="btn btn-outline-dark">
           <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
       </p>
 
- 
+
     <?php else : ?>
       <table class="table table-striped table-sm">
         <thead>
@@ -58,5 +74,3 @@ use App\helpers\Func;
 </main>
 </div>
 </div>
-
-
