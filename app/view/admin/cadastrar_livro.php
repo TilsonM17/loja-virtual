@@ -22,31 +22,31 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
     </div>
     <p class="text-center h3">Cadastrar um novo Livro.</p>
     <hr>
-    <form method="post" @submit.prevent enctype="multipart/form-data">
+    <form method="post" @submit action="<?php Func::url("admin/livros_cadastro_submit") ?>" enctype="multipart/form-data">
 
         <fieldset>
             <legend>Dados Livros</legend>
             <div class="row">
                 <div class="my-2 col-md-6">
                     <label for="">Nome do Livro*</label>
-                    <input type="text" name="nome_livro" class="form-control" placeholder="Nome do Livro" id="">
+                    <input type="text" name="nome_livro" v-model="txt_nome" class="form-control" placeholder="Nome do Livro" require>
                 </div>
 
                 <div class="my-2 col-md-6">
                     <label for="">Data de Lançamento*</label>
-                    <input type="date" name="data" class="form-control" placeholder="Descrição" id="">
+                    <input type="date" name="data" v-model="txt_data" class="form-control" placeholder="Descrição" require>
                 </div>
                 <div class="my-2 col-md-6">
                     <label for="">Preco*</label>
-                    <input type="number" name="preco" class="form-control" placeholder="Quanto custa este Livro?" id="">
+                    <input type="number" name="preco" v-model.number="txt_preco" class="form-control" placeholder="Quanto custa este Livro?" require>
                 </div>
                 <div class="my-2 col-md-6">
                     <label for="">Desconto</label>
-                    <input type="number" name="desconto" class="form-control" placeholder="Aplicar Desconto" id="">
+                    <input type="number" name="desconto" v-model.number="txt_desconto" class="form-control" placeholder="Aplicar Desconto" require>
                 </div>
                 <div class="my-2 col-md-12">
                     <label for="">Imagem de Capa</label>
-                    <input type="file" name="imagem" class="form-control" id="">
+                    <input type="file" name="imagem" v-model="file" class="form-control" id="" require>
                 </div>
             </div>
 
@@ -58,8 +58,8 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             <div class="row">
                 <div class="my-2 col-md-6">
                     <label for="">Escolha o Autor*</label>
-                    <select name="autor" id="" class="form-control">
-                        <option class="form-control" value=""></option>
+                    <select name="autor" id="" class="form-control" require>
+
                         <?php foreach ($autores as $autor) : ?>
                             <option class="form-control" value="<?= $autor->GetId() ?>"><?= $autor->GetNomeAutor() ?></option>
                         <?php endforeach; ?>
@@ -69,8 +69,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
                 <div class="my-2 col-md-6">
                     <label for="">Escolha a Editora*</label>
-                    <select name="editora" id="" class="form-control">
-                        <option class="form-control" value=""></option>
+                    <select name="editora" id="" class="form-control" require>
                         <?php foreach ($editoras as $editora) : ?>
                             <option class="form-control" value="<?= $editora->GetId() ?>"><?= $editora->GetNomeEditora() ?></option>
                         <?php endforeach; ?>
@@ -88,13 +87,13 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
                 <div class="my-2 col-md-6">
 
-                    <label for="">Categoria</label>
-                    <input type="text" name="categoria" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="">
+                    <label for="">Categoria*</label>
+                    <input type="text" name="categoria[]" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="" require>
                 </div>
 
                 <div class="my-2 col-md-6">
-                    <label for="">Idade Minima</label>
-                    <input type="number" name="idade_minima" class="form-control" placeholder="Aplicar Desconto" id="">
+                    <label for="">Idade Minima para Ler o Livro*</label>
+                    <input type="number" value="5" name="idade_minima" class="form-control" placeholder="Aplicar Desconto" id="" require>
                 </div>
             </div>
         </fieldset>
@@ -107,7 +106,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             <div class="row">
                 <div class="my-2 col-md-12">
                     <label for="">Descrição</label>
-                    <textarea name="descricao" class="form-control" id="" cols="20" rows="9" placeholder="Em poucas palavras descreva o Livro">
+                    <textarea name="descricao" require class="form-control" id="" cols="20" rows="9" placeholder="Em poucas palavras descreva o Livro">
                     </textarea>
                 </div>
             </div>
@@ -116,7 +115,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
         <hr>
 
         <div class="mb-5 text-center">
-            <button class="btn btn-outline-primary">
+            <button :disabled="btn" type="submit" @click="Enviar" class="btn btn-outline-primary">
                 Cadastrar
             </button>
         </div>
@@ -139,12 +138,43 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
         el: "#app",
         data() {
             return {
-              
+                btn: true,
                 cat_txt: '',
-                categoria: []
+                categoria: [],
+                //----------------------------------
+                txt_nome: "",
+                txt_preco: 100,
+                txt_desconto: 0,
+                txt_data: undefined,
+                file: ''
+                //---------------------------------
+            }
+        },
+        watch: {
+            txt_nome() {
+                this.ValidarInpts();
+            },
+
+            txt_preco() {
+                this.ValidarInpts();
+            },
+
+            txt_desconto() {
+                this.ValidarInpts()
+            },
+
+            txt_data() {
+                this.ValidarInpts();
             }
         },
         methods: {
+            ValidarInpts() {
+                if (this.txt_nome.length > 0 && this.txt_preco != "" && this.txt_data != "") {
+                    this.btn = false;
+                } else {
+                    this.btn = true;
+                }
+            },
             AddCategoria() {
                 if (this.cat_txt.length == 0 || this.categoria.length == 3) {
                     return
@@ -156,7 +186,10 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             },
             TrashCategoria(cat) {
                 var index = this.categoria.indexOf(cat)
-                this.categoria.splice(index,1);
+                this.categoria.splice(index, 1);
+            },
+            Enviar(){
+              
             }
         }
     });

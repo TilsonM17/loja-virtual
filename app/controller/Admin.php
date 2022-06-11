@@ -86,6 +86,10 @@ class Admin{
 
       }
 
+      public function livrosCadastroSubmit(){
+        (new Livro)->livrosCadastroSubmit(Request::createFromGlobals(),$this->gestor);
+      }
+
       public function cadastrarEditora(){
         (new Editora)->cadastrarEditora(Request::createFromGlobals(),$this->gestor);
       }

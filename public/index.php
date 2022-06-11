@@ -44,7 +44,7 @@ $router->group("/admin",function($router){
    $router->post("/autor/cadastrar","Admin@cadastrarAutor");
    $router->post("/editora/cadastrar","Admin@cadastrarEditora");
    $router->post("/editora/atualizar/:id","Admin@actualisarEditora");
-   
+   $router->post("/livros_cadastro_submit", "Admin@livrosCadastroSubmit");
    $router->post("/autor/atualizar/:id","Admin@atualizarAutor");
    #--------------------------------------------------------------------
    
