@@ -22,7 +22,8 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
     </div>
     <p class="text-center h3">Cadastrar um novo Livro.</p>
     <hr>
-    <form method="post" @submit action="<?php Func::url("admin/livros_cadastro_submit") ?>" enctype="multipart/form-data">
+
+    <form method="post" action="<?php Func::url("admin/livros_cadastro_submit") ?>" enctype="multipart/form-data">
 
         <fieldset>
             <legend>Dados Livros</legend>
@@ -46,7 +47,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
                 </div>
                 <div class="my-2 col-md-12">
                     <label for="">Imagem de Capa</label>
-                    <input type="file" name="imagem" v-model="file" class="form-control" id="" require>
+                    <input type="file" name="imagem" v-model="file" class="form-control" accept="image/png, image/gif, image/jpeg" id="" require>
                 </div>
             </div>
 
@@ -58,8 +59,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             <div class="row">
                 <div class="my-2 col-md-6">
                     <label for="">Escolha o Autor*</label>
-                    <select name="autor" id="" class="form-control" require>
-
+                    <select name="autor" class="form-control" require>
                         <?php foreach ($autores as $autor) : ?>
                             <option class="form-control" value="<?= $autor->GetId() ?>"><?= $autor->GetNomeAutor() ?></option>
                         <?php endforeach; ?>
@@ -69,7 +69,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
                 <div class="my-2 col-md-6">
                     <label for="">Escolha a Editora*</label>
-                    <select name="editora" id="" class="form-control" require>
+                    <select name="editora" class="form-control" require>
                         <?php foreach ($editoras as $editora) : ?>
                             <option class="form-control" value="<?= $editora->GetId() ?>"><?= $editora->GetNomeEditora() ?></option>
                         <?php endforeach; ?>
@@ -88,12 +88,13 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
                 <div class="my-2 col-md-6">
 
                     <label for="">Categoria*</label>
-                    <input type="text" name="categoria[]" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="" require>
+                    <input type="text" name="" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="" require>
+                    <input type="hidden" name="categoria" :value="arr_categoria">
                 </div>
 
                 <div class="my-2 col-md-6">
                     <label for="">Idade Minima para Ler o Livro*</label>
-                    <input type="number" value="5" name="idade_minima" class="form-control" placeholder="Aplicar Desconto" id="" require>
+                    <input type="number" value="5" v-model="txt_idade" name="idade_minima" class="form-control" placeholder="Aplicar Desconto" id="" require>
                 </div>
             </div>
         </fieldset>
@@ -106,22 +107,23 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             <div class="row">
                 <div class="my-2 col-md-12">
                     <label for="">Descrição</label>
-                    <textarea name="descricao" require class="form-control" id="" cols="20" rows="9" placeholder="Em poucas palavras descreva o Livro">
+                    <textarea name="descricao" v-model="txt_descricao" require class="form-control" id="" cols="20" rows="9" placeholder="Em poucas palavras descreva o Livro">
                     </textarea>
                 </div>
             </div>
         </fieldset>
 
         <hr>
-
         <div class="mb-5 text-center">
-            <button :disabled="btn" type="submit" @click="Enviar" class="btn btn-outline-primary">
+            <button :disabled="btn" @click="Enviar" :type="postar" class="btn btn-outline-primary">
                 Cadastrar
             </button>
         </div>
 
-
     </form>
+
+
+
 
 
 </main>
@@ -134,19 +136,23 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 <script>
     Vue.config.devtools = true;
 
-    new Vue({
+    const vue = new Vue({
         el: "#app",
         data() {
             return {
                 btn: true,
                 cat_txt: '',
                 categoria: [],
+                arr_categoria: '',
                 //----------------------------------
                 txt_nome: "",
                 txt_preco: 100,
                 txt_desconto: 0,
                 txt_data: undefined,
-                file: ''
+                file: '',
+                txt_idade: 12,
+                txt_descricao: "",
+                postar: "button",
                 //---------------------------------
             }
         },
@@ -165,11 +171,14 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
             txt_data() {
                 this.ValidarInpts();
+            },
+            cat_txt() {
+                this.ValidarInpts();
             }
         },
         methods: {
             ValidarInpts() {
-                if (this.txt_nome.length > 0 && this.txt_preco != "" && this.txt_data != "") {
+                if (this.txt_nome.length > 0 && this.txt_preco != "" && this.txt_data != "" && this.categoria.length > 0) {
                     this.btn = false;
                 } else {
                     this.btn = true;
@@ -182,14 +191,22 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
                 this.categoria.push(this.cat_txt);
                 this.cat_txt = "";
-
+                this.arr_categoria = this.categoria.join(",")
+              
             },
             TrashCategoria(cat) {
                 var index = this.categoria.indexOf(cat)
                 this.categoria.splice(index, 1);
+
             },
-            Enviar(){
-              
+            Enviar() {
+
+
+
+                this.postar = "submit";
+
+                <?php sleep(2) ?>
+
             }
         }
     });

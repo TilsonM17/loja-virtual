@@ -61,7 +61,7 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-      echo "";
+      Func::printArray($_SESSION);
  });
 
 

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use PhpParser\Node\Expr\Print_;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -55,6 +56,22 @@ class Livro
          * @Column(name="`ativo`")
          */
         private $ativo;
+        /**
+         * @Column(name="`pri_categoria`",type="string")
+         */
+        private $pri_cat;
+        /**
+         * @Column(name="`seg_categoria`",type="string")
+         */
+        private $seg_cat;
+        /**
+         * @Column(name="`ter_categoria`",type="string")
+         */
+        private $ter_cat;
+        /**
+         * @Column(name="`idade_minima`",type="string")
+         */
+        private $idade_minima;
 
         private $created_at;
         private $update_at;
@@ -80,7 +97,7 @@ class Livro
         }
         public function SetAutor($s)
         {
-                $this->autor = htmlspecialchars($s);
+                $this->autor = $s;
         }
         public function GetAutor()
         {
@@ -142,8 +159,53 @@ class Livro
         {
                 return $this->deleted_at;
         }
+        public function GetPriCategoria()
+        {
+                return $this->pri_cat;
+        }
+        public function GetSegCategoria()
+        {
+                return $this->seg_cat;
+        }
+        public function GetTerCategoria()
+        {
+                return $this->ter_cat;
+        }
+
         public function livrosCadastroSubmit(Request $request, $gestor)
         {
-                Func::printArray($request->request);
+                /***
+                 * [imagem] => Symfony\Component\HttpFoundation\File\UploadedFile Object
+                (
+                    [test:Symfony\Component\HttpFoundation\File\UploadedFile:private] => 
+                    [originalName:Symfony\Component\HttpFoundation\File\UploadedFile:private] => 27-272348_docker-logo-png-transparent-png.png
+                    [mimeType:Symfony\Component\HttpFoundation\File\UploadedFile:private] => image/png
+                    [error:Symfony\Component\HttpFoundation\File\UploadedFile:private] => 0
+                    [pathName:SplFileInfo:private] => /tmp/phpAdPLT5
+                    [fileName:SplFileInfo:private] => phpAdPLT5
+                )
+                 */
+
+                /**
+                 * [nome_livro] => Docker para Iniciantes
+                 * [data] => 2022-06-07
+                 * [preco] => 100
+                 * [desconto] => 0
+                 * [autor] => 1
+                 * [editora] => 1
+                 * [categoria:tecnologia,Devops] => 
+                 * [idade_minima] => 12
+                 * [descricao] => dfcfdfdf
+                 */
+                // id_livro, nome_livro, id_autor, id_editora, data_lancamento, pri_categoria,
+                // seg_categoria, ter_categoria, idade_minima, descricao, preco, preco_desconto,
+                // desconto, ativo, created_at, update_at
+                Func::printArray($request->request->all());
+                /*
+                 $this->nome_livro = $request->get('nome_livro');
+                 $this->autor = $request->get('autor');
+                 $this->editora = $request->get('editora');
+                 $this->data_lancamento = $request->get('data');
+                 $this->pri_cat = $request->get('categoria');*/
         }
 }
