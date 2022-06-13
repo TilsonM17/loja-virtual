@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
+use PhpParser\Node\Expr\Print_;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -196,14 +197,15 @@ class Livro
                  * [idade_minima] => 12
                  * [descricao] => dfcfdfdf
                  */
-// id_livro, nome_livro, id_autor, id_editora, data_lancamento, pri_categoria,
-// seg_categoria, ter_categoria, idade_minima, descricao, preco, preco_desconto,
-// desconto, ativo, created_at, update_at
-                 
+                // id_livro, nome_livro, id_autor, id_editora, data_lancamento, pri_categoria,
+                // seg_categoria, ter_categoria, idade_minima, descricao, preco, preco_desconto,
+                // desconto, ativo, created_at, update_at
+                Func::printArray($request->request->all());
+                /*
                  $this->nome_livro = $request->get('nome_livro');
                  $this->autor = $request->get('autor');
                  $this->editora = $request->get('editora');
                  $this->data_lancamento = $request->get('data');
-                 $this->pri_cat = $request->get('categoria');
+                 $this->pri_cat = $request->get('categoria');*/
         }
 }

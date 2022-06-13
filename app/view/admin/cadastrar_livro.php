@@ -88,7 +88,8 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
                 <div class="my-2 col-md-6">
 
                     <label for="">Categoria*</label>
-                    <input type="text" :name="arr_categoria" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="" require>
+                    <input type="text" name="" @keyup.enter="AddCategoria" v-model="cat_txt" class="form-control" placeholder="Categoria" id="" require>
+                    <input type="hidden" name="categoria" :value="arr_categoria">
                 </div>
 
                 <div class="my-2 col-md-6">
@@ -135,14 +136,14 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 <script>
     Vue.config.devtools = true;
 
- const vue =  new Vue({
+    const vue = new Vue({
         el: "#app",
         data() {
             return {
                 btn: true,
                 cat_txt: '',
                 categoria: [],
-                arr_categoria: [],
+                arr_categoria: '',
                 //----------------------------------
                 txt_nome: "",
                 txt_preco: 100,
@@ -151,7 +152,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
                 file: '',
                 txt_idade: 12,
                 txt_descricao: "",
-                postar:"button",
+                postar: "button",
                 //---------------------------------
             }
         },
@@ -190,16 +191,18 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
                 this.categoria.push(this.cat_txt);
                 this.cat_txt = "";
-
+                this.arr_categoria = this.categoria.join(",")
+              
             },
             TrashCategoria(cat) {
                 var index = this.categoria.indexOf(cat)
                 this.categoria.splice(index, 1);
-                
+
             },
             Enviar() {
 
-                this.arr_categoria = "categoria:"+this.categoria;
+
+
                 this.postar = "submit";
 
                 <?php sleep(2) ?>
