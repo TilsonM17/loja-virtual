@@ -63,12 +63,9 @@ $router->group("/api",function($router){
 
  $router->get('/a',function(){   
 
-     /**
-      * Preciso que tenha uma variavel para cada categoria
-      * Max são 3 categorias
-      */
-    
-    // Func::printArray($cat);
+    $data = new DateTime("2022-06-01");
+     //Func::printArray($data);
+     echo $data->format('Y-m-d');
  });
 
 

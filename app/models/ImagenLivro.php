@@ -46,7 +46,6 @@ class ImagenLivro {
             return $this->id_livro_img;
         }
 
-        
         public function GetIdLivro(){
             return $this->id_livro;
         }
@@ -60,6 +59,9 @@ class ImagenLivro {
             $this->img_nome = $img_nome;
         }
 
+        public function cadastrarImagem(Livro $livro){
+            
+        }
    
 
        
