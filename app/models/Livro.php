@@ -135,6 +135,36 @@ class Livro
         {
                 return $this->quantidade_estoque;
         }
+
+        public function SetPriCat($v)
+        {
+                $this->pri_cat = $v;
+        }
+        public function GetPriCat()
+        {
+                return $this->pri_cat;
+        }
+
+        public function SetSegCat($v)
+        {
+                $this->seg_cat = $v;
+        }
+        public function GetSegCat()
+        {
+                return $this->seg_cat;
+        }
+        public function SetTerCat($v)
+        {
+                $this->ter_cat = $v;
+        }
+        public function GetTerCat()
+        {
+                return $this->ter_cat;
+        }
+
+
+
+
         public function SetCreatedAt($s)
         {
                 $this->created_at = $s;
@@ -206,6 +236,50 @@ class Livro
                  $this->autor = $request->get('autor');
                  $this->editora = $request->get('editora');
                  $this->data_lancamento = $request->get('data');
-                 $this->pri_cat = $request->get('categoria');*/
+                 $this->pri_cat = $request->get('categoria');
+                 */
+        }
+
+        public function atribuirValorAsRespectivasCategorias(string $categorias)
+        {
+                /*
+               
+Array
+(
+    [nome_livro] => Docker para Iniciantes
+    [data] => 2022-06-01
+    [preco] => 5000
+    [desconto] => 0
+    [autor] => 2
+    [editora] => 5
+    [categoria] => Tecnologia,Devops,Aruitetura de Sistemas
+    [idade_minima] => 12
+    [descricao] => Excelente livro para inicinates e não so.
+Mas para todo professional de Infraestrutura
+)
+                 */
+                $cat = explode(",", $categorias);
+                switch (count($cat)) {
+                        case 1:
+                                $this->SetPriCat($cat[0]);
+                                return "{$this->GetPriCat()}";
+                                break;
+                        case 2:
+                                $this->SetPriCat($cat[0]);
+                                $this->SetSegCat($cat[1]);
+                                return "{$this->GetPriCat()} - {$this->GetSegCategoria()}";
+                                break;
+
+                        case 3:
+                                $this->SetPriCat($cat[0]);
+                                $this->SetSegCat($cat[1]);
+                                $this->SetTerCat($cat[2]);
+                                return "{$this->GetPriCat()} - {$this->GetSegCategoria()} - {$this->GetTerCategoria()}";
+                                break;
+
+                        default:
+                                return false;
+                                break;
+                }
         }
 }
