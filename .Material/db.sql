@@ -103,7 +103,7 @@ CREATE TABLE `tb_editora` (
   `id_editora` int NOT NULL AUTO_INCREMENT,
   `nome_editora` varchar(45) NOT NULL,
   PRIMARY KEY (`id_editora`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `tb_editora` (
 
 LOCK TABLES `tb_editora` WRITE;
 /*!40000 ALTER TABLE `tb_editora` DISABLE KEYS */;
-INSERT INTO `tb_editora` VALUES (1,'Casa do Codigo');
+INSERT INTO `tb_editora` VALUES (1,'Casa do Codigo'),(2,'Nova Editora LDA'),(3,'Mufassa Letras LDA'),(5,'Angola Goldem Edtion');
 /*!40000 ALTER TABLE `tb_editora` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,23 +128,24 @@ CREATE TABLE `tb_livro` (
   `nome_livro` varchar(100) NOT NULL,
   `id_autor` int NOT NULL,
   `id_editora` int NOT NULL,
-  `id_categoria` int NOT NULL,
   `data_lancamento` date NOT NULL,
-  `descricao` varchar(45) DEFAULT NULL,
+  `pri_categoria` varchar(45) NOT NULL,
+  `seg_categoria` varchar(45) DEFAULT NULL,
+  `ter_categoria` varchar(45) DEFAULT NULL,
+  `idade_minima` int NOT NULL,
+  `descricao` varchar(300) DEFAULT NULL,
   `preco` int NOT NULL,
   `preco_desconto` int DEFAULT NULL,
   `desconto` int NOT NULL DEFAULT '0',
   `ativo` set('N','Y') NOT NULL DEFAULT 'Y',
-  `quantidade_estoque` int NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id_livro`),
   KEY `fk_tb_livro_1_idx` (`id_editora`),
   KEY `fk_tb_livro_to_autor_idx` (`id_autor`),
   CONSTRAINT `fk_tb_livro_to_autor` FOREIGN KEY (`id_autor`) REFERENCES `tb_autor` (`id_autor`) ON DELETE CASCADE,
-  CONSTRAINT `fk_tb_livro_to_categoria` FOREIGN KEY (`id_editora`) REFERENCES `tb_categoria` (`id_categoria`) ON DELETE CASCADE,
   CONSTRAINT `fk_tb_livro_to_editora` FOREIGN KEY (`id_editora`) REFERENCES `tb_editora` (`id_editora`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,6 +154,7 @@ CREATE TABLE `tb_livro` (
 
 LOCK TABLES `tb_livro` WRITE;
 /*!40000 ALTER TABLE `tb_livro` DISABLE KEYS */;
+INSERT INTO `tb_livro` VALUES (24,'Docker para Iniciantes',2,5,'2022-06-01','Tecnologia','Devops','Aruitetura de Sistemas',12,'Excelente livro para inicinates e não so.\r\nMas para todo professional de Infraestrutura',5000,NULL,0,'Y','2022-06-14 12:06:47',NULL);
 /*!40000 ALTER TABLE `tb_livro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,6 +169,7 @@ CREATE TABLE `tb_livro_img` (
   `id_livro_img` int NOT NULL AUTO_INCREMENT,
   `id_livro` int NOT NULL,
   `img_nome` varchar(100) NOT NULL,
+  `img_type` varchar(45) NOT NULL,
   PRIMARY KEY (`id_livro_img`),
   KEY `fk_tb_livro_img_to_tb_livro` (`id_livro`),
   CONSTRAINT `fk_tb_livro_img_to_tb_livro` FOREIGN KEY (`id_livro`) REFERENCES `tb_livro` (`id_livro`) ON DELETE CASCADE
@@ -253,4 +256,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-07 13:55:37
+-- Dump completed on 2022-06-14 23:40:21

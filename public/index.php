@@ -10,6 +10,7 @@ use App\helpers\EasyPDO;
 use App\helpers\Func;
 use App\Middlewares\AuthAdmin;
 use Buki\Router\Router;
+use PhpParser\Node\Stmt\Echo_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,7 +62,10 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-      Func::printArray($_SESSION);
+
+    $data = new DateTime("2022-06-01");
+     //Func::printArray($data);
+     echo $data->format('Y-m-d');
  });
 
 

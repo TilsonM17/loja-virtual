@@ -107,7 +107,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             <div class="row">
                 <div class="my-2 col-md-12">
                     <label for="">Descrição</label>
-                    <textarea name="descricao" v-model="txt_descricao" require class="form-control" id="" cols="20" rows="9" placeholder="Em poucas palavras descreva o Livro">
+                    <textarea name="descricao" v-model.trim ="txt_descricao" require class="form-control" id="" cols="20" rows="9" placeholder="Em poucas palavras descreva o Livro">
                     </textarea>
                 </div>
             </div>

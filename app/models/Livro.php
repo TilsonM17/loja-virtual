@@ -3,6 +3,7 @@
 namespace App\models;
 
 use App\helpers\Func;
+use DateTime;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
@@ -34,24 +35,32 @@ class Livro
         /**
          * @Column(name="`descricao`",type="string")
          */
-        private $assunto;
+        private $descricao;
 
         /**
-         * @Column(name="`id_autor`",type="int")
+         * @Column(name="`id_autor`",type="integer")
          */
         private $autor;
         /**
-         * @Column(name="`id_editora`",type="int")
+         * @Column(name="`id_editora`",type="integer")
          */
         private $editora;
         /**
-         * @Column(name="`data_lancamento`")
+         * @Column(name="`data_lancamento`", type="datetime")
          */
-        private $data_lancamento;
+        private DateTime $data_lancamento;
         /**
          * @Column(name="`preco`",type="integer")
          */
         private $preco;
+        /**
+         * @Column(name="`desconto`",type="integer")
+         */
+        private $desconto;
+        /**
+         * @Column(name="`preco_desconto`",type="integer")
+         */
+        private $preco_desconto;
         /**
          * @Column(name="`ativo`")
          */
@@ -105,11 +114,11 @@ class Livro
         }
         public function SetDataLancamento($s)
         {
-                $this->data_lancamento = $s;
+                $this->data_lancamento = new DateTime($s);
         }
         public function GetDataLancamento()
         {
-                return $this->data_lancamento;
+                return $this->data_lancamento->format("Y-m-d");
         }
         public function SetPreco($s)
         {
@@ -135,6 +144,39 @@ class Livro
         {
                 return $this->quantidade_estoque;
         }
+
+        public function SetPriCat($v)
+        {
+                $this->pri_cat = $v;
+        }
+        public function GetPriCat()
+        {
+                return $this->pri_cat;
+        }
+
+        public function SetSegCat($v)
+        {
+                $this->seg_cat = $v;
+        }
+        public function GetSegCat()
+        {
+                return $this->seg_cat;
+        }
+        public function SetTerCat($v)
+        {
+                $this->ter_cat = $v;
+        }
+        public function GetTerCat()
+        {
+                return $this->ter_cat;
+        }
+
+        public function SetDescricao($desc)
+        {
+                $this->descricao = trim($desc);
+        }
+
+
         public function SetCreatedAt($s)
         {
                 $this->created_at = $s;
@@ -174,38 +216,48 @@ class Livro
 
         public function livrosCadastroSubmit(Request $request, $gestor)
         {
-                /***
-                 * [imagem] => Symfony\Component\HttpFoundation\File\UploadedFile Object
-                (
-                    [test:Symfony\Component\HttpFoundation\File\UploadedFile:private] => 
-                    [originalName:Symfony\Component\HttpFoundation\File\UploadedFile:private] => 27-272348_docker-logo-png-transparent-png.png
-                    [mimeType:Symfony\Component\HttpFoundation\File\UploadedFile:private] => image/png
-                    [error:Symfony\Component\HttpFoundation\File\UploadedFile:private] => 0
-                    [pathName:SplFileInfo:private] => /tmp/phpAdPLT5
-                    [fileName:SplFileInfo:private] => phpAdPLT5
-                )
-                 */
+                $this->nome_livro = $request->request->get('nome_livro');
+                $this->autor = $request->request->get('autor');
+                $this->preco = $request->request->get("preco");
+                $this->desconto = $request->request->get('desconto');
+                $this->editora = $request->request->get('editora');
+                $this->SetDataLancamento($request->request->get('data'));
+                $this->atribuirValorAsRespectivasCategorias($request->request->get('categoria'));
+                $this->idade_minima = $request->request->get('idade_minima');
+                $this->SetDescricao($request->request->get("descricao"));
+                $this->ativo = "Y";
 
-                /**
-                 * [nome_livro] => Docker para Iniciantes
-                 * [data] => 2022-06-07
-                 * [preco] => 100
-                 * [desconto] => 0
-                 * [autor] => 1
-                 * [editora] => 1
-                 * [categoria:tecnologia,Devops] => 
-                 * [idade_minima] => 12
-                 * [descricao] => dfcfdfdf
-                 */
-                // id_livro, nome_livro, id_autor, id_editora, data_lancamento, pri_categoria,
-                // seg_categoria, ter_categoria, idade_minima, descricao, preco, preco_desconto,
-                // desconto, ativo, created_at, update_at
-                Func::printArray($request->request->all());
-                /*
-                 $this->nome_livro = $request->get('nome_livro');
-                 $this->autor = $request->get('autor');
-                 $this->editora = $request->get('editora');
-                 $this->data_lancamento = $request->get('data');
-                 $this->pri_cat = $request->get('categoria');*/
+                $gestor->persist($this);
+                $gestor->flush();
+
+
+                echo "Terminado";
+        }
+
+        public function atribuirValorAsRespectivasCategorias(string $categorias)
+        {
+                $cat = explode(",", $categorias);
+                switch (count($cat)) {
+                        case 1:
+                                $this->SetPriCat($cat[0]);
+
+                                break;
+                        case 2:
+                                $this->SetPriCat($cat[0]);
+                                $this->SetSegCat($cat[1]);
+
+                                break;
+
+                        case 3:
+                                $this->SetPriCat($cat[0]);
+                                $this->SetSegCat($cat[1]);
+                                $this->SetTerCat($cat[2]);
+
+                                break;
+
+                        default:
+
+                                break;
+                }
         }
 }
