@@ -91,7 +91,7 @@ class ImagenLivro
     public function cadastrarImagem($file, int $id_livro, $gestor)
     {
         if ($file->getError() != 0) {
-            $_SESSION['_erro'] = "Não foi possivel inserir a Imagem, Tente mais tarde";
+            $_SESSION['_erro'] = "Não foi Completar a Inserção, Tente mais tarde";
             Func::redirect("livros");
             return;
         }
@@ -111,7 +111,7 @@ class ImagenLivro
         $gestor->flush();
 
        
-        $_SESSION['_sucesso'] = "Imagem inserida com sucesso";
+        $_SESSION['_sucesso'] = "Livro inserida com sucesso";
         Func::redirect("livros");
 
     }

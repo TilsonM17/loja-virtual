@@ -34,10 +34,9 @@ class Main
     public function index()
     {
         //Buscar os livros na base de Dados e mandar os dados na View
-       #  $l = (new EasyPDO())->select("SELECT i.id_livro,nome_livro, autor,preco,quantidade_estoque,img_nome FROM tb_livro_img as i inner join tb_livro as l on l.id_livro = i.id_livro;");
-     
+       $l = (new EasyPDO())->select("SELECT * FROM vw_livro");
         # Renderizar na View
-        echo $this->plate->render('home', ["livros" =>  '']);
+        echo $this->plate->render('home', ["livros" =>  $l]);
     }
 
     public function nova_conta()
