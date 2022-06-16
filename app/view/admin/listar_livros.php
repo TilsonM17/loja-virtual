@@ -51,6 +51,9 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
 
     <?php else : ?>
+      <a href="<?php Func::url("admin/cadastrar_livros") ?>" class="btn btn-outline-dark">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </a>
       <table class="table table-striped table-sm">
         <thead>
           <tr>
