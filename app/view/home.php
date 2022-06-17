@@ -11,12 +11,11 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="font-weight-light"><?= APP_NAME ?></h1>
-            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-                etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-            <p>
+            <p class="lead text-muted">Os Melhores Livros do Mundo em um so Lugar.</p>
+            <!-- <p>
                 <a href="#" class="btn btn-primary my-2">Main call to action</a>
                 <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-            </p>
+            </p> -->
         </div>
     </div>
 </section>
@@ -25,24 +24,22 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
     <div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <?php foreach ($livros as $key => $value) : ?>
+            <?php foreach ($livros as  $value) : ?>
 
                 <div class="col">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" role="img" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                        </svg>
+                        <img  src="<?= $crooper->make(IMG_SRC.$value['img_nome'],300,300) ?>" class="bd-placeholder-img card-img-top" alt="Imagem do Livro" >
 
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                                content. This content is a little bit longer.</p>
+                            <p class="card-text"><?php $desc = $value['descricao'] ?? "Sem descrição."; echo $desc ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <button type="button" class="btn btn-outline-primary">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                    </button>
+                                   
                                 </div>
-                                <small class="text-muted">9 mins</small>
+                                <small class="text-muted"><?php echo number_format($value['preco'])."AKZ"?></small>
                             </div>
                         </div>
                     </div>
