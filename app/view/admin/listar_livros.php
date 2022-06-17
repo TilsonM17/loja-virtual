@@ -29,12 +29,12 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
         </p>
         <?php unset($_SESSION['_erro']) ?>
       </div>
-    <?php elseif (isset($_SESSION['_sucess'])) : ?>
+    <?php elseif (isset($_SESSION['_sucesso'])) : ?>
       <div class="alert alert-success">
         <p class="text-center h6">
-          <?= $_SESSION['_sucess'] ?>
+          <?= $_SESSION['_sucesso'] ?>
         </p>
-        <?php unset($_SESSION['_sucess']) ?>
+        <?php unset($_SESSION['_sucesso']) ?>
       </div>
     <?php endif; ?>
 
@@ -51,25 +51,43 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
 
     <?php else : ?>
+      <a href="<?php Func::url("admin/cadastrar_livros") ?>" class="btn btn-outline-dark">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </a>
       <table class="table table-striped table-sm">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Header</th>
+            <th scope="col">Nome do Livro</th>
             <th scope="col">Header</th>
             <th scope="col">Header</th>
             <th scope="col">Header</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1,001</td>
-            <td>random</td>
-            <td>data</td>
-            <td>placeholder</td>
-            <td>text</td>
-          </tr>
-        <?php endif; ?>
+          <?php foreach ($livros as $livro) : ?>
+            <tr>
+              <td><?= "dd" ?></td>
+            
+              <!---data-bs-toggle="modal" data-bs-target="#atualisar"-->
+              <td>
+
+
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#actualisar">
+                  <i class="fa fa-pencil" aria-hidden="true"> </i>
+                </button>
+
+
+              </td>
+              <td>
+                <button class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#apagar">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      <?php endif; ?>
   </div>
 </main>
 </div>

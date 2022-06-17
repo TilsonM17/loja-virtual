@@ -28,10 +28,9 @@ class testLivro extends TestCase
         #arrange
         $l = new ImagenLivro();
 
-        /** */
-        //$valor =  $l->atribuirValorAsRespectivasCategorias('Tecnologia,Devops,Arquitetura de Sistemas');
-        #assert
-       // $this->assertEquals("Tecnologia - Devops - Arquitetura de Sistemas", $valor);
+        $l->cadastrarImagem(new class extends Livro{
+            
+        });
         
     }
 }

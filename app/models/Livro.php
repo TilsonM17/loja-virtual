@@ -216,6 +216,8 @@ class Livro
 
         public function livrosCadastroSubmit(Request $request, $gestor)
         {
+              
+                
                 $this->nome_livro = $request->request->get('nome_livro');
                 $this->autor = $request->request->get('autor');
                 $this->preco = $request->request->get("preco");
@@ -230,8 +232,9 @@ class Livro
                 $gestor->persist($this);
                 $gestor->flush();
 
+                //INSERIR IMAGEM
 
-                echo "Terminado";
+                (new ImagenLivro)->cadastrarImagem($request->files->get('imagem'),$this->GetIdLivro(),$gestor);
         }
 
         public function atribuirValorAsRespectivasCategorias(string $categorias)

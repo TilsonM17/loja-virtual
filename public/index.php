@@ -62,10 +62,7 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-
-    $data = new DateTime("2022-06-01");
-     //Func::printArray($data);
-     echo $data->format('Y-m-d');
+   Func::printArray(gd_info());
  });
 
 

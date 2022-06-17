@@ -15,13 +15,14 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use TilsonM17\config\GestorEntidade;
-
+use CoffeeCode\Cropper\Cropper;
 
 class Main
 {
 
     private $plate;
     private $gestor;
+    private $crooper;
 
 
     public function __construct()
@@ -29,15 +30,18 @@ class Main
         // Create new Plates instance
         $this->plate = new Engine('../app/view');
         $this->gestor = GestorEntidade::GetEntityManager();
+        $this->crooper = new Cropper("assets/resource/cache/img"); 
     }
 
     public function index()
     {
         //Buscar os livros na base de Dados e mandar os dados na View
-       #  $l = (new EasyPDO())->select("SELECT i.id_livro,nome_livro, autor,preco,quantidade_estoque,img_nome FROM tb_livro_img as i inner join tb_livro as l on l.id_livro = i.id_livro;");
-     
-        # Renderizar na View
-        echo $this->plate->render('home', ["livros" =>  '']);
+       $l = (new EasyPDO())->select("SELECT * FROM vw_livro");
+
+        echo $this->plate->render('home', [
+            "livros" =>  $l,
+            'crooper' => $this->crooper
+        ]);
     }
 
     public function nova_conta()
@@ -51,9 +55,6 @@ class Main
     public function nova_conta_submit(Request $request)
     {
         
-
-
-        die();
         #Verifica se os imputs estão vazios
         if (empty($_POST['nome']) or empty($_POST['email']) or empty($_POST['senha'])) {
             $_SESSION['_erro'] = "Os Campos não pode estar vazio";

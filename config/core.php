@@ -27,6 +27,7 @@
 
  define("IMG_SRC","assets/resource/upload/livros/");
 
+
   # Require as configuraçes da Rotas
   require_once 'router.php';
 

@@ -2,6 +2,7 @@
 
 namespace App\controller;
 
+use App\helpers\EasyPDO;
 use League\Plates\Engine;
 use App\helpers\Func;
 use TilsonM17\config\GestorEntidade;
@@ -38,7 +39,8 @@ class Admin{
       /**Renderiza a lista de livros ja cadastrados */
 
       public function listarLivros(){
-       $resultado = $this->gestor->getRepository(Livro::class)->findAll();
+
+       $resultado = (new EasyPDO() )->select("SELECT * FROM vw_livro");
 
         echo $this->plate->render('listar_livros',['livros' => $resultado] );
       }
