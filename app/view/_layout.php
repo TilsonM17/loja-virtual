@@ -1,3 +1,6 @@
+<?php
+use App\helpers\Func;
+?>
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
@@ -5,10 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fontawesome/all.css">
-    <script src="assets/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="assets/fontawesome/all.min.js"></script>
+    <link rel="stylesheet" href="<?php Func::url("assets/bootstrap/css/bootstrap.min.css")?>">
+    <link rel="stylesheet" href="<?php Func::url("assets/fontawesome/all.css")?>">
+    <script src="<?php Func::url("assets/bootstrap/js/bootstrap.bundle.min.js")?>"></script>
+    <script src="<?php Func::url("assets/fontawesome/all.min.js")?>"></script>
     
     <title> <?= APP_NAME ?> - <?=$this->e($title)?> </title>
 </head>

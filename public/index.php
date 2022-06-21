@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  $router->get('/confirmar_email_submit',"Main@confirmar_email_submit");
  $router->get("/erro_envio_email","Main@erro_envio_email");
  $router->get("/validar_email_submit/:string","Main@validar_email_submit");
+ $router->get("/detalhe/:string","Main@detalheLivro");
 
  # Areas de login Normal
  $router->get("/login","Main@login");
@@ -30,7 +31,6 @@ use Symfony\Component\HttpFoundation\Response;
 # Are de Login Administrativa
  $router->get("/admin/login","Admin@login",['before'=> ValidateSessionAdmin::class]);
  $router->post("/admin/login_admin_submit","Admin@login_admin_submit");
-
 
 $router->group("/admin",function($router){
    $router->get("/home","Admin@index");
@@ -62,7 +62,8 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-   Func::printArray(gd_info());
+     echo dirname(__DIR__). "/public/assets/resource/upload/livros";
+   //Func::printArray(gd_info());
  });
 
 

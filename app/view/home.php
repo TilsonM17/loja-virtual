@@ -37,6 +37,9 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
                                     <button type="button" class="btn btn-outline-primary">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>
+                                    <a class="btn btn-outline-dark" href="<?= Func::url("detalhe/{$value['id_livro']}") ?>">
+                                      <i class="fa-solid fa-eye"></i>
+                                    </a>
                                    
                                 </div>
                                 <small class="text-muted"><?php echo number_format($value['preco'])."AKZ"?></small>

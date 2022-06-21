@@ -30,14 +30,14 @@ class Main
         // Create new Plates instance
         $this->plate = new Engine('../app/view');
         $this->gestor = GestorEntidade::GetEntityManager();
-        $this->crooper = new Cropper("assets/resource/cache/img"); 
+        $this->crooper = new Cropper("./assets/resource/cache/img"); 
     }
 
     public function index()
     {
         //Buscar os livros na base de Dados e mandar os dados na View
-       $l = (new EasyPDO())->select("SELECT * FROM vw_livro");
-
+        $l = (new EasyPDO())->select("SELECT * FROM vw_livro");
+      
         echo $this->plate->render('home', [
             "livros" =>  $l,
             'crooper' => $this->crooper
@@ -122,6 +122,15 @@ class Main
 
 
     }
+    /**
+     * Retorna uma pagina com detalhes do respectivo livro
+     */
+    public function detalheLivro(string $id){
+
+        $result = (new EasyPDO())->select("SELECT * FROM vw_livro WHERE id_livro = :id",[':id' => $id]);
+
+        echo $this->plate->render("detalhe_livro",['livro' => $result, "crooper" => $this->crooper]);
+    }
 
     public function confirmar_email()
     {
@@ -170,45 +179,6 @@ class Main
     }
     public function teste()
     {
-        #region Teste
-
-
-        # Configuarar a EntidadeFunc::redirect("nova_conta");
-        /*
-       $u = new Usuario();
-       $u->SetNome("Eduardo Brandão");
-       $u->SetEmail("brandao@gmail.com");
-       $u->SetSenha("#imports;");
-
-       # Avisar ao Gestor que uma nova classe vai ser inserida na DB
-        $this->gestor->persist($u);
-        $this->gestor->flush();
-        
-
-        #region SELECT BUSCAR TUDO
-        $retorno = $this->gestor->getRepository(Usuario::class)->findAll();
-        foreach ($retorno as $key => $value) {
-                echo "{$value->GetNome()}","<br>";
-            }
-      
-
-        #region SELECT BUSCAR POR ID
-        $retorno = $this->gestor->find(Usuario::class,2);
-         echo "{$retorno->GetNome()}","<br>";
-        
-
-        #region SELECT BUSCAR POR NOME
-            $retorno = $this->gestor->getRepository(Usuario::class)->findOneBy([
-                'email' => 'tilsonmat@gmail.com'
-            ]);
-
-            Func::printArray($retorno);
-        */
-
-        #endregion
-        #id_livro, nome_livro, autor, data_lancamento, preco, ativo, quantidade_estoque, created_at, update_at, deleted_at
-
-     
         echo "<br>", "TERMINADO";
     }
 
