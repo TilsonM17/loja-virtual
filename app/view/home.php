@@ -28,21 +28,22 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
 
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img  src="<?= $crooper->make(IMG_SRC.$value['img_nome'],300,300) ?>" class="bd-placeholder-img card-img-top" alt="Imagem do Livro" >
+                        <img src="<?= $crooper->make(IMG_SRC . $value['img_nome'], 300, 300) ?>" class="bd-placeholder-img card-img-top" alt="Imagem do Livro">
 
                         <div class="card-body">
-                            <p class="card-text"><?php $desc = $value['descricao'] ?? "Sem descrição."; echo $desc ?></p>
+                            <p class="card-text"><?php $desc = $value['descricao'] ?? "Sem descrição.";
+                                                    echo $desc ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-outline-primary">
+                                    <button type="button" class="btn btn-outline-primary" @click="AddCarrinho(<?= $value['id_livro'] ?>)">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     </button>
                                     <a class="btn btn-outline-dark" href="<?= Func::url("detalhe/{$value['id_livro']}") ?>">
-                                      <i class="fa-solid fa-eye"></i>
+                                        <i class="fa-solid fa-eye"></i>
                                     </a>
-                                   
+
                                 </div>
-                                <small class="text-muted"><?php echo number_format($value['preco'])."AKZ"?></small>
+                                <small class="text-muted"><?php echo number_format($value['preco']) . "AKZ" ?></small>
                             </div>
                         </div>
                     </div>
@@ -54,3 +55,44 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
 
     <!---------------------------------------------------------------->
     <?= $this->insert('_footer') ?>
+
+
+
+    <?php $this->start("scripts") ?>
+
+    <script src="<?php Func::url('assets/js/vue.min.js') ?>"></script>
+    <script src="<?php Func::url('assets/js/axios.js') ?>"></script>
+
+    <script>
+        Vue.config.devtools = true
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+                AddCarrinho(id) {
+
+                    axios.post('/carrinho/add/', {
+                            id: id
+                        }).then(function(response) {
+                            console.log(response)
+                        })
+                        .catch(function(error) {
+                            // handle error
+                            console.log(error);
+                        });
+
+                }
+            }
+
+
+        })
+    </script>
+
+
+
+    <?php $this->stop(); ?>

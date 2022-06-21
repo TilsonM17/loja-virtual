@@ -182,7 +182,10 @@ class Main
         echo "<br>", "TERMINADO";
     }
 
-
+    public function carrinhoAdd(){
+        $_POST = json_decode(file_get_contents("php://input"),true);
+        Func::printArray($_POST);
+    }
     public function error($e)
     {
         echo $this->plate->render("_erro", ['e' => $e]);

@@ -25,6 +25,14 @@ use Symfony\Component\HttpFoundation\Response;
  $router->get("/validar_email_submit/:string","Main@validar_email_submit");
  $router->get("/detalhe/:string","Main@detalheLivro");
 
+ #======================================
+ # CARRINHO DE COMPRAS
+ $router->group("/carrinho",function($router){
+     $router->post("/add","Main@carrinhoAdd");
+ });
+  
+ #======================================
+
  # Areas de login Normal
  $router->get("/login","Main@login");
  $router->post("/login_submit","Main@login_submit");
@@ -62,8 +70,7 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-     echo dirname(__DIR__). "/public/assets/resource/upload/livros";
-   //Func::printArray(gd_info());
+    echo "---";
  });
 
 
