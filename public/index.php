@@ -62,7 +62,8 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-   Func::printArray(gd_info());
+     echo dirname(__DIR__). "/public/assets/resource/upload/livros";
+   //Func::printArray(gd_info());
  });
 
 

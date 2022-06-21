@@ -99,7 +99,7 @@ class ImagenLivro
       //Novo nome
         $nome = date("Y-m-d") . "-" . Func::purl(3) . "." . $file->getClientOriginalExtension();
 
-        $file->move(dirname(__DIR__) . "/public/assets/resource/upload/livros", $nome);
+        $file->move(dirname(__DIR__,2) . "/public/assets/resource/upload/livros", $nome);
    
 
         // Fazer upload de uma imagem e inserir na base de dados

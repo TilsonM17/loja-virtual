@@ -30,7 +30,7 @@ class Main
         // Create new Plates instance
         $this->plate = new Engine('../app/view');
         $this->gestor = GestorEntidade::GetEntityManager();
-        $this->crooper = new Cropper("assets/resource/cache/img"); 
+        $this->crooper = new Cropper("./assets/resource/cache/img"); 
     }
 
     public function index()
