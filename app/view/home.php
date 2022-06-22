@@ -52,6 +52,7 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
         </div>
     </div>
 
+ 
 
     <!---------------------------------------------------------------->
     <?= $this->insert('_footer') ?>
@@ -67,23 +68,26 @@ $this->layout('_layout', ['title' => 'User Profile']) ?>
         Vue.config.devtools = true
         new Vue({
             el: '#app',
-            data() {
-                return {
-
+            data(){
+                return{
+                    total_carrinho: 0
                 }
+            },  
+            mounted(){
+                this.total_carrinho = <?= !isset($_SESSION['carrinho']) ? 0 : count($_SESSION['carrinho'])?>
             },
             methods: {
 
                 AddCarrinho(id) {
-
+                    vue = this;
                     axios.post('/carrinho/add/', {
                             id: id
                         }).then(function(response) {
-                            console.log(response)
+                            console.log(response.data);
+                           vue.total_carrinho = response.data;
                         })
                         .catch(function(error) {
-                            // handle error
-                            console.log(error);
+                            console.log("Teu Rabo deu erro!");
                         });
 
                 }

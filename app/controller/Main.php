@@ -187,7 +187,7 @@ class Main
     public function carrinhoAdd()
     {
         $retorno = Func::preencherVariavelComPost();
-        (new Carrinho)->addNoCarrinho($retorno);
+        return (new Carrinho)->addNoCarrinho($retorno);
     }
     public function error($e)
     {

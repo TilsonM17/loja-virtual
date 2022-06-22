@@ -15,19 +15,21 @@ class Carrinho
      * @method addNoCarrinho
      * @return array
      */
-    public function addNoCarrinho(array $array)
+    public function addNoCarrinho(array $array): int
     {
         if (isset($_SESSION['carrinho'])) {
             if (array_key_exists($array['id'], $_SESSION['carrinho'])) {
-              $_SESSION['carrinho'][$array['id']]++;
-               return;
+                $_SESSION['carrinho'][$array['id']]++;
+                return count($_SESSION['carrinho']);
             } else {
-                 array_push($_SESSION['carrinho'],$array['id'] = 1);
-                return;
+                array_push($_SESSION['carrinho'], $array['id'] = 1);
+                return count($_SESSION['carrinho']);
             }
+        } else {
+            //Não existe a sessão com o carrinho de compras
+            $this->carrinho[$array['id']] = 1;  
+            $_SESSION['carrinho'] = $this->carrinho;
+            return count($_SESSION['carrinho']);
         }
-        //Não existe a sessão com o carrinho de compras
-        $this->carrinho[$array['id']] = 1;
-        $_SESSION['carrinho'] = $this->carrinho;
     }
 }

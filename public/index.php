@@ -70,7 +70,8 @@ $router->group("/api",function($router){
 
 
  $router->get('/a',function(){   
-  
+  #session_unset();
+  #session_unset();
    Func::printArray($_SESSION);
  });
 
