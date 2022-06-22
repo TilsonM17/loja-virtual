@@ -2,7 +2,7 @@
 
 use App\helpers\Func;
 
-$this->layout('_layout', ['title' => 'User Profile']) ?>
+$this->layout('_layout', ['title' => 'Pagina Inicial']) ?>
 <!--Carrega o navbar do site-->
 <?= $this->insert('_navbar') ?>
 

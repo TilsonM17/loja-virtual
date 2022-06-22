@@ -189,6 +189,13 @@ class Main
         $retorno = Func::preencherVariavelComPost();
         return (new Carrinho)->addNoCarrinho($retorno);
     }
+
+    public function carrinhoListar(){
+        $retorno = (new Carrinho)->transformarCarrinhoEmListaObjectos();
+
+        Func::printArray($retorno);
+        echo $this->plate->render("carrinhoListar",["" => $retorno]);
+    }
     public function error($e)
     {
         echo $this->plate->render("_erro", ['e' => $e]);

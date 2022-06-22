@@ -48,7 +48,7 @@ use App\helpers\Func; ?>
         <?php endif; ?>
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">
+          <a class="nav-link active" aria-current="page" href="<?= Func::url("carrinho/") ?>">
             <i class="fa-solid fa-cart-shopping"></i><span class="badge bg-primary rounded-pill">{{total_carrinho}}</span>
           </a>
         </li>
