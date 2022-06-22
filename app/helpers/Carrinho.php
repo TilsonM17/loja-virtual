@@ -28,7 +28,7 @@ class Carrinho
                 $_SESSION['carrinho'][$array['id']]++;
                 return count($_SESSION['carrinho']);
             } else {
-                array_push($_SESSION['carrinho'], $array['id'] = 1);
+                $_SESSION['carrinho'][$array['id']] = 1;
                 return count($_SESSION['carrinho']);
             }
         } else {
@@ -55,12 +55,12 @@ class Carrinho
         )
         */
         if(count($this->carrinho) == 0 or !isset($_SESSION['carrinho'])){
-            return 0;
+            return [];
         }
 
         foreach($this->carrinho as $key => $valor){
-           $info = (new EasyPDO())->select("SELECT * FROM vw_livro WHERE id_livro = :id",[':id' => $key]);
-            array_push($this->carrinho_completo,$info[0]);  
+            $info = (new EasyPDO())->select("SELECT id_livro,nome_livro,preco FROM vw_livro WHERE id_livro = :id",[':id' => $key]);
+            array_push($this->carrinho_completo,$info);  
         }
 
         return $this->carrinho_completo;

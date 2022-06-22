@@ -37,7 +37,7 @@ class Main
     public function index()
     {
         //Buscar os livros na base de Dados e mandar os dados na View
-        $l = (new EasyPDO())->select("SELECT * FROM vw_livro");
+        $l = (new EasyPDO())->select("SELECT * FROM vw_livro ORDER BY id_livro ASC");
 
         echo $this->plate->render('home', [
             "livros" =>  $l,
@@ -191,10 +191,12 @@ class Main
     }
 
     public function carrinhoListar(){
+        
         $retorno = (new Carrinho)->transformarCarrinhoEmListaObjectos();
 
         Func::printArray($retorno);
-        echo $this->plate->render("carrinhoListar",["" => $retorno]);
+
+        echo $this->plate->render("carrinhoListar",["carrinho" => $retorno]);
     }
     public function error($e)
     {
