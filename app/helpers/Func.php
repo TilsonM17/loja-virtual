@@ -61,5 +61,9 @@ namespace App\helpers;
         }
     } 
 
+    public static function preencherVariavelComPost(){
+        return json_decode(file_get_contents("php://input"),true);
+    }
+
    
  }
