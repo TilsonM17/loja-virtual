@@ -190,14 +190,21 @@ class Main
         return (new Carrinho)->addNoCarrinho($retorno);
     }
 
-    public function carrinhoListar(){
-        
+    public function carrinhoListar()
+    {
+
         $retorno = (new Carrinho)->transformarCarrinhoEmListaObjectos();
 
         //Func::printArray($retorno);
 
-        echo $this->plate->render("carrinhoListar",["carrinho" => $retorno]);
+        echo $this->plate->render("carrinhoListar", ["carrinho" => $retorno]);
     }
+
+    public function carrinhoLimpar()
+    {
+        Carrinho::limparCarrinho();
+    }
+
     public function error($e)
     {
         echo $this->plate->render("_erro", ['e' => $e]);

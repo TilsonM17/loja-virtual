@@ -42,6 +42,8 @@ $this->layout("_layout", ["title" => "Fazer Login"]) ?>
                 <div class="col-md-6 my-4">
                     <input type="submit" :disabled="botao" class="btn btn-outline-primary" value="Cadastrar">
                 </div>
+
+                <p>Não tem uma conta? Crie uma <strong> gratuitamente.</strong> <a href="<?php Func::url("nova_conta") ?>">Criar Conta</a>.</p>
             </form>
 
         </div>
@@ -58,9 +60,11 @@ $this->layout("_layout", ["title" => "Fazer Login"]) ?>
 
 <?php $this->start('scripts') ?>
 
-<script src="assets/js/vue.min.js"></script>
+
+<script src="<?php Func::url("assets/js/vue.min.js")?>"></script>
 <script>
     // Validar o front-end de cadastro
+    Vue.config.devtools = true
     new Vue({
         el: '#app',
         data() {
@@ -73,7 +77,8 @@ $this->layout("_layout", ["title" => "Fazer Login"]) ?>
                 email_validate_sucess: false,
                 email_val_sms: "",
 
-                text_email_sms_var: true
+                text_email_sms_var: true,
+                total_carrinho:0
                 //=====================================================
 
 

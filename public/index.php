@@ -29,6 +29,7 @@ $router->get("/detalhe/:string", "Main@detalheLivro");
 # CARRINHO DE COMPRAS
 $router->group("/carrinho", function ($router) {
   $router->get("/","Main@carrinhoListar");
+  $router->get("/limpar","Main@carrinhoLimpar");
   $router->post("/add", "Main@carrinhoAdd");
 });
 

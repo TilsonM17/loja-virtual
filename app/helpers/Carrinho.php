@@ -12,6 +12,10 @@ class Carrinho
     private array $carrinho;
 
     private array $carrinho_completo = [];
+    /**
+     * @param int Total da compra
+     */
+    private int $total_compra = 0;
 
     public function __construct()
     {
@@ -54,9 +58,18 @@ class Carrinho
             $info = (new EasyPDO())->select("SELECT id_livro,nome_livro,preco FROM vw_livro WHERE id_livro = :id", [':id' => $key]);
             //Adiçionar campo de Subtotal
             $subtotal = ($info[0]['preco'] * $valor);
+            $this->total_compra += $subtotal;
+
             array_push($this->carrinho_completo, array_merge($info[0], ['quantidade' => $valor, 'subtotal' => $subtotal]));
         }
-
+        //Passar os Dados da da variavel para uma sessao
+        $_SESSION['total_compra'] = $this->total_compra;
         return $this->carrinho_completo;
+    }
+
+    public static function limparCarrinho(){
+         unset($_SESSION['carrinho']);
+         unset($_SESSION['total_compra']);
+         Func::redirect();
     }
 }

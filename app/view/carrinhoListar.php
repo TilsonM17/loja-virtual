@@ -5,7 +5,7 @@ use App\helpers\Func;
 $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
 
 
-<section class="row">
+<section class="row container-fluid">
     <div class="col-md-12">
         <h3 class="text-center mt-5">Checkout Final</h3>
         <hr>
@@ -20,6 +20,9 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                 </h4>
             </div>
         <?php else : ?>
+            <div class="col-md-12 text-end my-3">
+                <a href="<?php Func::url("carrinho/limpar") ?>" class="btn btn-outline-success">Limpar Carrinho</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -59,6 +62,12 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
 
                 </tbody>
             </table>
+
+            <div class="col-md-12 text-center">
+                    <p class="h2">
+                        <?= "<strong>Total da Compra:</strong> ".number_format($_SESSION['total_compra']), " AKZ" ?>
+                    </p>
+            </div>
         <?php endif; ?>
     </div>
 
