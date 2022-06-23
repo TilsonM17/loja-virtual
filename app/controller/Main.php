@@ -194,7 +194,7 @@ class Main
         
         $retorno = (new Carrinho)->transformarCarrinhoEmListaObjectos();
 
-        Func::printArray($retorno);
+        //Func::printArray($retorno);
 
         echo $this->plate->render("carrinhoListar",["carrinho" => $retorno]);
     }

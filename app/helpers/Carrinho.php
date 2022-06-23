@@ -18,8 +18,9 @@ class Carrinho
         $this->carrinho = $_SESSION['carrinho'] ?? [];
     }
     /**
+     * Este metodo é chamado em uma consulta Ajax
      * @method addNoCarrinho
-     * @return array
+     * @return int Total de items na sessão carrinho 
      */
     public function addNoCarrinho(array $array): int
     {
@@ -43,24 +44,17 @@ class Carrinho
      * um array de com os dados dos respectivos dados
      * Como preço, e o total de compra
      */
-    public function transformarCarrinhoEmListaObjectos()
+    public function transformarCarrinhoEmListaObjectos(): array
     {
-        /*
-             [carrinho] => Array
-        (
-            [27] => 1
-            [28] => 2
-            [29] => 1
-            [30] => 1
-        )
-        */
-        if(count($this->carrinho) == 0 or !isset($_SESSION['carrinho'])){
+        if (count($this->carrinho) == 0 or !isset($_SESSION['carrinho'])) {
             return [];
         }
 
-        foreach($this->carrinho as $key => $valor){
-            $info = (new EasyPDO())->select("SELECT id_livro,nome_livro,preco FROM vw_livro WHERE id_livro = :id",[':id' => $key]);
-            array_push($this->carrinho_completo,$info);  
+        foreach ($this->carrinho as $key => $valor) {
+            $info = (new EasyPDO())->select("SELECT id_livro,nome_livro,preco FROM vw_livro WHERE id_livro = :id", [':id' => $key]);
+            //Adiçionar campo de Subtotal
+            $subtotal = ($info[0]['preco'] * $valor);
+            array_push($this->carrinho_completo, array_merge($info[0], ['quantidade' => $valor, 'subtotal' => $subtotal]));
         }
 
         return $this->carrinho_completo;
