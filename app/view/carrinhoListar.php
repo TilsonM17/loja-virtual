@@ -42,8 +42,8 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                         <tr>
                             <th><?= $value['nome_livro'] ?></th>
                             <td><?= $value['quantidade'] ?></td>
-                            <td><?= number_format($value['preco'])," AKZ" ?></td>
-                            <td><?= number_format($value['subtotal'])," AKZ"?></td>
+                            <td><?= number_format($value['preco']), " AKZ" ?></td>
+                            <td><?= number_format($value['subtotal']), " AKZ" ?></td>
                             <td>
                                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#actualisar">
                                     <i class="fa fa-pencil" aria-hidden="true"> </i>
@@ -64,11 +64,72 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
             </table>
 
             <div class="col-md-12 text-center">
-                    <p class="h2">
-                        <?= "<strong>Total da Compra:</strong> ".number_format($_SESSION['total_compra']), " AKZ" ?>
-                    </p>
+                <p class="h2">
+                    <?= "<strong>Total da Compra:</strong> " . number_format($_SESSION['total_compra']), " AKZ" ?>
+                </p>
             </div>
+
+            <div class="col-md-2 offset-md-5 mt-4" id="paypal-button-container"></div>
         <?php endif; ?>
     </div>
 
 </section>
+
+
+<?php $this->start("scripts"); ?>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AQkAmxyzwaR3LaQ4GpmM6yw_oCkdS1Twmrwtdhd7xXSUoS9HSX2PImdl-cRgXbDn1lxeXGYwav9X5Ayg&components=buttons"> </script>
+<script>
+    paypal.Buttons({
+        style: {
+
+            layout: 'horizontal',
+
+            color: 'blue',
+
+            shape: 'pill',
+
+            label: 'pay'
+
+        },
+        createOrder: function(data, actions) {
+
+            // This function sets up the details of the transaction, including the amount and line item details.
+
+            return actions.order.create({
+
+                purchase_units: [{
+
+                    amount: {
+
+                        value: "<?= $_SESSION['total_compra']?>"
+
+                    }
+
+                }]
+
+            });
+
+        },
+
+        onApprove: function(data, actions) {
+
+            // This function captures the funds from the transaction.
+            console.log(actions)
+            return actions.order.capture().then(function(details) {
+
+                // This function shows a transaction success message to your buyer.
+
+                alert('Transaction completed by ' + details.payer.name.given_name);
+
+            });
+
+        }
+
+    }).render('#paypal-button-container');
+
+    //This function displays payment buttons on your web page.
+</script>
+
+
+<?php $this->end(); ?>
