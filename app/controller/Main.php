@@ -2,6 +2,7 @@
 
 namespace App\controller;
 
+use App\helpers\Carrinho;
 use App\helpers\DB;
 use App\helpers\EasyPDO;
 use App\helpers\Email;
@@ -30,14 +31,14 @@ class Main
         // Create new Plates instance
         $this->plate = new Engine('../app/view');
         $this->gestor = GestorEntidade::GetEntityManager();
-        $this->crooper = new Cropper("./assets/resource/cache/img"); 
+        $this->crooper = new Cropper("./assets/resource/cache/img");
     }
 
     public function index()
     {
         //Buscar os livros na base de Dados e mandar os dados na View
-        $l = (new EasyPDO())->select("SELECT * FROM vw_livro");
-      
+        $l = (new EasyPDO())->select("SELECT * FROM vw_livro ORDER BY id_livro ASC");
+
         echo $this->plate->render('home', [
             "livros" =>  $l,
             'crooper' => $this->crooper
@@ -54,7 +55,7 @@ class Main
      */
     public function nova_conta_submit(Request $request)
     {
-        
+
         #Verifica se os imputs estão vazios
         if (empty($_POST['nome']) or empty($_POST['email']) or empty($_POST['senha'])) {
             $_SESSION['_erro'] = "Os Campos não pode estar vazio";
@@ -125,11 +126,12 @@ class Main
     /**
      * Retorna uma pagina com detalhes do respectivo livro
      */
-    public function detalheLivro(string $id){
+    public function detalheLivro(string $id)
+    {
 
-        $result = (new EasyPDO())->select("SELECT * FROM vw_livro WHERE id_livro = :id",[':id' => $id]);
+        $result = (new EasyPDO())->select("SELECT * FROM vw_livro WHERE id_livro = :id", [':id' => $id]);
 
-        echo $this->plate->render("detalhe_livro",['livro' => $result, "crooper" => $this->crooper]);
+        echo $this->plate->render("detalhe_livro", ['livro' => $result, "crooper" => $this->crooper]);
     }
 
     public function confirmar_email()
@@ -182,7 +184,40 @@ class Main
         echo "<br>", "TERMINADO";
     }
 
+    public function carrinhoAdd()
+    {
+        $retorno = Func::preencherVariavelComPost();
 
+        return (new Carrinho)->addNoCarrinho($retorno);
+    }
+
+    public function carrinhoListar()
+    {
+        $retorno = (new Carrinho)->transformarCarrinhoEmListaObjectos();
+        echo $this->plate->render("carrinhoListar", ["carrinho" => $retorno]);
+    }
+
+    public function carrinhoLimpar()
+    {
+        Carrinho::limparCarrinho();
+    }
+
+    public function carrinhoApagar()
+    {
+        $id = Func::preencherVariavelComPost();
+        (new Carrinho)->carrinhoApagar($id);
+    }
+
+    public function carrinhoUpdate()
+    {
+        $data = Func::preencherVariavelComPost();
+
+        (new Carrinho)->carrinhoUpdate($data);
+    }
+    public function logout(){
+        unset($_SESSION['login_web_id']);
+        header('location: /');
+    }
     public function error($e)
     {
         echo $this->plate->render("_erro", ['e' => $e]);

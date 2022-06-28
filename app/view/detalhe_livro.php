@@ -19,7 +19,7 @@ $this->layout('_layout', ['title' => 'Detalhe do livro']) ?>
 <?php else : ?>
     <section class="row container">
         <div class="col-md-6">
-            
+
             <img src="<?= "../" . IMG_SRC . $livro[0]['img_nome'] ?>" width="400" height="200" class="img-thumbnail" alt="Imagem do Livro">
         </div>
         <div class="col-md-6">
@@ -34,21 +34,47 @@ $this->layout('_layout', ['title' => 'Detalhe do livro']) ?>
 
             <p>
                 <?php
-                    echo "#{$livro[0]['pri_categoria']}","  ";
-                    echo $seg = (!empty($livro[0]['seg_categoria'])) ? "#{$livro[0]['seg_categoria']}" : "", "  ";
-                    echo $ter = (!empty($livro[0]['ter_categoria'])) ? "#{$livro[0]['ter_categoria']}" : "", "  ";
+                echo "#{$livro[0]['pri_categoria']}", "  ";
+                echo $seg = (!empty($livro[0]['seg_categoria'])) ? "#{$livro[0]['seg_categoria']}" : "", "  ";
+                echo $ter = (!empty($livro[0]['ter_categoria'])) ? "#{$livro[0]['ter_categoria']}" : "", "  ";
                 ?>
             </p>
 
             <hr>
-            <button class="btn btn-warning btn-lg " href="#" role="button"> 
-            <i class="fa-solid fa-cart-shopping"></i>  Comprar
+            <button class="btn btn-warning btn-lg " href="#" role="button">
+                <i class="fa-solid fa-cart-shopping"></i> Comprar
             </button>
-            
-            <a class="btn btn-primary btn-lg " href="<?= APP_URL?>" role="button"> 
+
+            <a class="btn btn-primary btn-lg " href="<?= APP_URL ?>" role="button">
                 Voltar
             </a>
         </div>
 
     </section>
 <?php endif; ?>
+
+
+
+<?php $this->start("scripts") ?>
+
+<script src="<?php Func::url('assets/js/vue.min.js') ?>"></script>
+
+
+<script>
+    Vue.config.devtools = true
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                total_carrinho: 0
+            }
+        },
+        mounted() {
+            this.total_carrinho = <?= !isset($_SESSION['carrinho']) ? 0 : count($_SESSION['carrinho']) ?>
+        }
+    })
+</script>
+
+
+
+<?php $this->stop(); ?>

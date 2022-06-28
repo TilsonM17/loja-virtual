@@ -57,30 +57,27 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
       <table class="table table-striped table-sm">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Nome do Livro</th>
-            <th scope="col">Header</th>
-            <th scope="col">Header</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Editora</th>
             <th scope="col">Header</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($livros as $livro) : ?>
             <tr>
-              <td><?= "dd" ?></td>
-            
+              <td><?= $livro['nome_livro'] ?></td>
+              <td><?= $livro['autor'] ?></td>
+              <td><?= $livro['nome_livro'] ?></td>
+
               <!---data-bs-toggle="modal" data-bs-target="#atualisar"-->
               <td>
-
-
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#actualisar">
                   <i class="fa fa-pencil" aria-hidden="true"> </i>
                 </button>
-
-
               </td>
               <td>
-                <button class="btn btn-outline-danger"  data-bs-toggle="modal" data-bs-target="#apagar">
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#apagar">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
               </td>

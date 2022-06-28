@@ -48,9 +48,7 @@ $this->layout('_layout', ['title' => 'Criar nova Conta'])  ?>
             <div class="col-md-6 my-4">
                 <input type="submit" :disabled="botao" class="btn btn-outline-primary" value="Cadastrar">
             </div>
-
-
-
+            <p>Já tem uma conta? Entre e fique por dentro das novidades <a href="<?php Func::url("login") ?>">Login</a>.</p>
         </form>
         <hr>
     </div>
@@ -63,6 +61,7 @@ $this->layout('_layout', ['title' => 'Criar nova Conta'])  ?>
 
 <script src="assets/js/vue.min.js"></script>
 <script>
+    Vue.config.devtools = true
     // Validar o front-end de cadastro
     new Vue({
         el: '#app',
@@ -77,7 +76,8 @@ $this->layout('_layout', ['title' => 'Criar nova Conta'])  ?>
                 email_validate_sucess: false,
                 email_val_sms: "",
 
-                text_email_sms_var: true
+                text_email_sms_var: true,
+                total_carrinho : 0
                 //=====================================================
 
 
