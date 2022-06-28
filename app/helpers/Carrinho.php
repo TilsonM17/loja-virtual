@@ -2,6 +2,7 @@
 
 namespace App\helpers;
 
+use App\controller\Main;
 use Iterator;
 
 class Carrinho
@@ -67,9 +68,22 @@ class Carrinho
         return $this->carrinho_completo;
     }
 
-    public static function limparCarrinho(){
-         unset($_SESSION['carrinho']);
-         unset($_SESSION['total_compra']);
-         Func::redirect();
+    public function carrinhoApagar(array $data)
+    {
+        unset($_SESSION['carrinho'][$data['id']]);
+    }
+
+    public static function limparCarrinho()
+    {
+        unset($_SESSION['carrinho']);
+        unset($_SESSION['total_compra']);
+        Func::redirect();
+    }
+
+    public function carrinhoUpdate(array $data)
+    {
+        // [id] => 28
+        // [qtd] => 4
+        $_SESSION['carrinho'][$data['id']] = $data['qtd'];
     }
 }

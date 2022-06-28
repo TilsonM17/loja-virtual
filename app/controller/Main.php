@@ -187,6 +187,7 @@ class Main
     public function carrinhoAdd()
     {
         $retorno = Func::preencherVariavelComPost();
+
         return (new Carrinho)->addNoCarrinho($retorno);
     }
 
@@ -203,6 +204,19 @@ class Main
     public function carrinhoLimpar()
     {
         Carrinho::limparCarrinho();
+    }
+
+    public function carrinhoApagar()
+    {
+        $id = Func::preencherVariavelComPost();
+        (new Carrinho)->carrinhoApagar($id);
+    }
+
+    public function carrinhoUpdate()
+    {
+        $data = Func::preencherVariavelComPost();
+
+        (new Carrinho)->carrinhoUpdate($data);
     }
 
     public function error($e)

@@ -20,9 +20,11 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                 </h4>
             </div>
         <?php else : ?>
-            <div class="col-md-12 text-end my-3">
-                <a href="<?php Func::url("carrinho/limpar") ?>" class="btn btn-outline-success">Limpar Carrinho</a>
+            <div class="col-md-12 text-end">
+                <a href="<?php Func::url("carrinho/limpar") ?>" class="btn btn-success">Limpar Carrinho</a>
+                <a href="<?php echo "http://localhost:8000/" ?>" class="btn btn-warning">Continuar a Comprar.</a>
             </div>
+
             <table class="table">
                 <thead>
                     <tr>
@@ -45,12 +47,12 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                             <td><?= number_format($value['preco']), " AKZ" ?></td>
                             <td><?= number_format($value['subtotal']), " AKZ" ?></td>
                             <td>
-                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#actualisar">
+                                <button type="button" class="btn btn-outline-primary" @click="Update(<?= $value['id_livro'] ?>,<?= $value['quantidade'] ?>)" data-bs-toggle="modal" data-bs-target="#actualisar">
                                     <i class="fa fa-pencil" aria-hidden="true"> </i>
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#apagar">
+                                <button class="btn btn-outline-danger" @click="Capturar(<?= $value['id_livro'] ?>)" data-bs-toggle="modal" data-bs-target="#apagar">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </td>
@@ -76,10 +78,122 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
 </section>
 
 
+<!-- Modal DELETE -->
+<div class="modal fade" id="apagar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="apagarModalLabel">Quero mesmo Eliminar do Carrinho?</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fa fa-close" aria-hidden="true"></i> Cancelar
+                    </button>
+                    <button @click="Apagar" class="btn btn-outline-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i> Apagar.
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!---Region-->
+<!-- Modal Actualisar -->
+<div class="modal fade" id="actualisar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Actualisar Quantidade.</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="my-3">
+                    <label for="">Alterar Quantidade.</label>
+                    <input type="number" v-model="qtd" name="qtd" class="form-control" require>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fa fa-close" aria-hidden="true"></i> Cancelar
+                    </button>
+                    <button type="button" @click="UpdateSubmit" class="btn btn-outline-primary">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Actualisar.
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- FIM Modal Create -->
+<!-- #endregion -->
+
+
+
+
+
 <?php $this->start("scripts"); ?>
 
 <script src="https://www.paypal.com/sdk/js?client-id=AQkAmxyzwaR3LaQ4GpmM6yw_oCkdS1Twmrwtdhd7xXSUoS9HSX2PImdl-cRgXbDn1lxeXGYwav9X5Ayg&components=buttons"> </script>
+<script src="<?php Func::url('assets/js/vue.min.js') ?>"></script>
+<script src="<?php Func::url('assets/js/axios.js') ?>"></script>
+
 <script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                id_valor: null,
+                qtd: 0
+            }
+        },
+        methods: {
+            Capturar(id) {
+                //Capturar o id do botão
+                this.id_valor = id
+            },
+            Apagar() {
+                var vue = this;
+                axios.post('/carrinho/apagar', {
+                        id: vue.id_valor
+                    }).then(function(response) {
+                        window.location.href = "/carrinho/"
+                    })
+                    .catch(function(error) {
+                        console.log("Erro!");
+                    });
+            },
+            Update(id, qtd) {
+                this.qtd = qtd
+                this.Capturar(id)
+            },
+            UpdateSubmit() {
+                var vue = this;
+                axios.post('/carrinho/update', {
+                        id: vue.id_valor,
+                        qtd: vue.qtd
+                    }).then(function(response) {
+                        console.log(response)
+                        window.location.href = "/carrinho/"
+                    })
+                    .catch(function(error) {
+                        console.log("Erro!");
+                    });
+            }
+        }
+    });
+    //=====================================================================
     paypal.Buttons({
         style: {
 
@@ -102,7 +216,7 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
 
                     amount: {
 
-                        value: "<?= $_SESSION['total_compra']?>"
+                        value: "<?= $_SESSION['total_compra'] ?>"
 
                     }
 

@@ -154,8 +154,6 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
 
 
 
-
-
 <!---Region-->
 <!-- Modal Create -->
 <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

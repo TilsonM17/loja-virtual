@@ -31,6 +31,9 @@ $router->group("/carrinho", function ($router) {
   $router->get("/","Main@carrinhoListar");
   $router->get("/limpar","Main@carrinhoLimpar");
   $router->post("/add", "Main@carrinhoAdd");
+  $router->post("/apagar", "Main@carrinhoApagar");
+  $router->post("/update", "Main@carrinhoUpdate");
+
 });
 
 #======================================
