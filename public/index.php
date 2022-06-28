@@ -8,6 +8,7 @@ require_once '../vendor/autoload.php';
 
 use App\helpers\EasyPDO;
 use App\helpers\Func;
+use App\Middlewares\Auth;
 use App\Middlewares\AuthAdmin;
 use Buki\Router\Router;
 use PhpParser\Node\Stmt\Echo_;
@@ -24,17 +25,20 @@ $router->get('/confirmar_email_submit', "Main@confirmar_email_submit");
 $router->get("/erro_envio_email", "Main@erro_envio_email");
 $router->get("/validar_email_submit/:string", "Main@validar_email_submit");
 $router->get("/detalhe/:string", "Main@detalheLivro");
+$router->get("/logout", "Main@logout");
 
 #======================================
 # CARRINHO DE COMPRAS
+$router->post("/carrinho/add", "Main@carrinhoAdd");
+
 $router->group("/carrinho", function ($router) {
   $router->get("/","Main@carrinhoListar");
   $router->get("/limpar","Main@carrinhoLimpar");
-  $router->post("/add", "Main@carrinhoAdd");
+  
   $router->post("/apagar", "Main@carrinhoApagar");
   $router->post("/update", "Main@carrinhoUpdate");
 
-});
+},['before' => Auth::class]);
 
 #======================================
 

@@ -42,7 +42,7 @@ use App\helpers\Func; ?>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link"> <i class="fa-solid fa-right-to-bracket"> </i></a>
+            <a class="nav-link" href="<?= Func::url("logout") ?>"> <i class="fa-solid fa-right-to-bracket"> </i></a>
           </li>
 
         <?php endif; ?>

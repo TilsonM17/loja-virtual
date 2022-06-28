@@ -193,11 +193,7 @@ class Main
 
     public function carrinhoListar()
     {
-
         $retorno = (new Carrinho)->transformarCarrinhoEmListaObjectos();
-
-        //Func::printArray($retorno);
-
         echo $this->plate->render("carrinhoListar", ["carrinho" => $retorno]);
     }
 
@@ -218,7 +214,10 @@ class Main
 
         (new Carrinho)->carrinhoUpdate($data);
     }
-
+    public function logout(){
+        unset($_SESSION['login_web_id']);
+        header('location: /');
+    }
     public function error($e)
     {
         echo $this->plate->render("_erro", ['e' => $e]);
