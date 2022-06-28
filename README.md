@@ -31,3 +31,12 @@ Para rodar o projecto rode o seguinte comando:
     $ php turbo
 
 Este comando vai iniciar o servidor embutido do php com o ***target*** para a pasta **public** que é a porta de entrada para a nossa aplicação.
+
+## Screenshots
+
+
+### Tela inicial com Usuario Logado
+![Tela do Home com usuario Logado](.Material/01.png)
+
+### Checkout Final, integração com Paypal
+![Tela do checkout Final](.Material/02.png)
