@@ -28,9 +28,10 @@ Na pasta `Material` tem um arquivo `db.sql`, este ficheiro contem o backup da ba
 
 Para rodar o projecto rode o seguinte comando: 
 
+    $ composer install
     $ php turbo
 
-Este comando vai iniciar o servidor embutido do php com o ***target*** para a pasta **public** que é a porta de entrada para a nossa aplicação.
+Este comando vai baixa as depencias do propjecto e vai  iniciar o servidor embutido do php com o ***target*** para a pasta **public** que é a porta de entrada para a nossa aplicação.
 
 ## Screenshots Usuario
 
