@@ -3,6 +3,7 @@
 namespace App\helpers;
 
 use App\controller\Main;
+use DateTime;
 use Iterator;
 
 class Carrinho
@@ -82,8 +83,37 @@ class Carrinho
 
     public function carrinhoUpdate(array $data)
     {
-        // [id] => 28
-        // [qtd] => 4
         $_SESSION['carrinho'][$data['id']] = $data['qtd'];
+    }
+
+    public function cadastrarCarrinhoBasedeDados(array $items)
+    {
+        //id_compra, id_usuario, total_compra,
+        // status, purl_donwload, data_compra
+        (new EasyPDO())->insert("INSERT INTO tb_compra VALUE(0,:usuario,:total_compra,:statu,:purl,:data)", [
+            ':usuario' => $_SESSION['login_web_id'],
+            ':total_compra' => $_SESSION['total_compra'],
+            'statu' => 'SEND',
+            ':purl' => Func::purl(),
+            ':data' => (new DateTime())->format("Y-m-d H:i:s")
+
+        ]);
+
+        //Resgatar o id da Compra
+        $id = (new EasyPDO())->select("SELECT MAX(id_compra) AS id FROM tb_compra;");
+
+        //Cadastrar os items
+        //id_items, id_compra, id_livro, qtd, sub_total
+        foreach ($items['items'] as $value) {
+            (new EasyPDO())->insert("INSERT INTO tb_items VALUE(0,:id,:livro,:qtd,:sub)", [
+                ':id' => $id[0]['id'],
+                ':livro' => $value['id_livro'],
+                ':qtd' => $value['quantidade'],
+                ':sub' => $value['subtotal']
+            ]);
+        }
+        unset($_SESSION['carrinho']);
+        unset($_SESSION['total_compra']);
+        
     }
 }

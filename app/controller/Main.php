@@ -214,9 +214,19 @@ class Main
 
         (new Carrinho)->carrinhoUpdate($data);
     }
-    public function logout(){
+    public function logout()
+    {
         unset($_SESSION['login_web_id']);
         header('location: /');
+    }
+    public function carrinhoCadastrar()
+    {
+        $data = Func::preencherVariavelComPost();
+       (new Carrinho)->cadastrarCarrinhoBasedeDados($data);
+    }
+
+    public function gratidao(){
+        echo $this->plate->render("gratidao");
     }
     public function error($e)
     {

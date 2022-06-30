@@ -24,7 +24,7 @@ $this->layout('_layout', ['title' => 'Detalhe do livro']) ?>
         </div>
         <div class="col-md-6">
             <h2><?= $livro[0]['nome_livro'] ?></h2>
-            <p>Autor : <strong><?= $livro[0]['nome_autor'] . " " . $livro[0]['sobre_nome'] ?></strong> </p>
+            <p>Autor : <strong><?= $livro[0]['autor'] ?></strong> </p>
             <p>Editora : <strong><?= $livro[0]['nome_editora'] ?></strong> </p>
             <p>Data Lançamento : <strong><?= $livro[0]['data_lancamento'] ?></strong> </p>
             <p>Idade Minima para a Leitura : <strong><?= $livro[0]['idade_minima'] ?></strong> </p>

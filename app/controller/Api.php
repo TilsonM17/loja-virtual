@@ -2,6 +2,7 @@
 
 namespace App\controller;
 
+use App\helpers\Carrinho;
 use App\helpers\EasyPDO;
 use App\helpers\Func;
 use TilsonM17\config\GestorEntidade;
@@ -48,6 +49,30 @@ class Api
 
 
         return $resultado;
+    }
+
+    public function capturarItems()
+    {
+    
+        Func::header();
+        $data = (new Carrinho)->transformarCarrinhoEmListaObjectos();
+       if (count($data) == 0) {
+            $resultado = [
+                'MESSAGE' => 'ERRO',
+                'STATUS' => '404',
+                'DATA' => 'Não encontrado'
+            ];
+        } else {
+            $resultado = [
+                'MESSAGE' => 'Sucesso',
+                'STATUS' => '200',
+                'DATA' => $data
+            ];
+        }
+
+
+        return $resultado;
+
     }
     /**
      * Lista todas editoras 
