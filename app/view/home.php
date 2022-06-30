@@ -27,7 +27,9 @@ $this->layout('_layout', ['title' => 'Pagina Inicial']) ?>
             <?php foreach ($livros as  $value) : ?>
 
                 <div class="col">
+                <h4 class="text-center"><?= $value['nome_livro'] ?></h4>
                     <div class="card shadow-sm">
+                       
                         <img src="<?= $crooper->make(IMG_SRC . $value['img_nome'], 300, 300) ?>" class="bd-placeholder-img card-img-top" alt="Imagem do Livro">
 
                         <div class="card-body">

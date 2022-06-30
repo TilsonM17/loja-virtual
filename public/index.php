@@ -37,6 +37,9 @@ $router->group("/carrinho", function ($router) {
   
   $router->post("/apagar", "Main@carrinhoApagar");
   $router->post("/update", "Main@carrinhoUpdate");
+  $router->post("/cadastrar", "Main@carrinhoCadastrar");
+  $router->get("/gratidao", "Main@gratidao");
+
 
 },['before' => Auth::class]);
 
@@ -75,13 +78,16 @@ $router->group("/api", function ($router) {
   $router->get("/autor/:id", "Api@listarAutor");
   $router->get("/editoras", "Api@listarEditoras");
   $router->get("/editora/:id", "Api@listarEditora");
+  $router->get("/items", "Api@capturarItems");
 });
 
 
 $router->get('/a', function () {
   #session_unset();
   #session_unset();
-  Func::printArray($_SESSION);
+  $_ = (new EasyPDO)->select("SELECT MAX(id_compra) AS id FROM tb_compra;");
+ Func::printArray($_);
+ 
 });
 
 

@@ -70,13 +70,20 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                     <?= "<strong>Total da Compra:</strong> " . number_format($_SESSION['total_compra']), " AKZ" ?>
                 </p>
             </div>
+            <hr>
+            <p><strong>*Nota: </strong>Enviaremos no seu email, o Link para Download</p>
+            <hr>
+            <div class="col-md-2 offset-md-5 mt-4" id="paypal-button-container">
+                <button @click.submit ="Cadastrar" type="button" class="btn btn-outline-primary">
+                    Testar
+                </button>
+            </div>
 
-            <div class="col-md-2 offset-md-5 mt-4" id="paypal-button-container"></div>
         <?php endif; ?>
     </div>
 
-</section>
 
+</section>
 
 <!-- Modal DELETE -->
 <div class="modal fade" id="apagar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -150,13 +157,19 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
 <script src="<?php Func::url('assets/js/axios.js') ?>"></script>
 
 <script>
+    Vue.config.devtools = true
     new Vue({
         el: '#app',
         data() {
             return {
                 id_valor: null,
-                qtd: 0
+                qtd: 0,
+
+                items: []
             }
+        },
+        mounted() {
+            this.CapturarItems()
         },
         methods: {
             Capturar(id) {
@@ -186,6 +199,29 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                     }).then(function(response) {
                         console.log(response)
                         window.location.href = "/carrinho/"
+                    })
+                    .catch(function(error) {
+                        console.log("Erro!");
+                    });
+            },
+            CapturarItems() {
+                var vue = this;
+                axios.get('/api/items')
+                    .then(function(response) {
+                        vue.items = response.data.DATA
+
+                    })
+                    .catch(function(error) {
+                        console.log("Erro!");
+                    });
+            },
+            Cadastrar() {
+                var vue = this;
+                axios.post('/carrinho/cadastrar', {
+                        items: vue.items,
+                    }).then(function(response) {
+                        console.log(response)
+                        //window.location.href = "/carrinho/"
                     })
                     .catch(function(error) {
                         console.log("Erro!");

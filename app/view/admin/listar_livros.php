@@ -68,7 +68,7 @@ $this->layout('_layout', ['title' => 'Area Admin']) ?>
             <tr>
               <td><?= $livro['nome_livro'] ?></td>
               <td><?= $livro['autor'] ?></td>
-              <td><?= $livro['nome_livro'] ?></td>
+              <td><?= $livro['nome_editora'] ?></td>
 
               <!---data-bs-toggle="modal" data-bs-target="#atualisar"-->
               <td>
