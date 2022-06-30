@@ -74,9 +74,9 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
             <p><strong>*Nota: </strong>Enviaremos no seu email, o Link para Download</p>
             <hr>
             <div class="col-md-2 offset-md-5 mt-4" id="paypal-button-container">
-                <button @click.submit ="Cadastrar" type="button" class="btn btn-outline-primary">
+                <!--<button @click.submit="Cadastrar" type="button" class="btn btn-outline-primary">
                     Testar
-                </button>
+                </button>-->
             </div>
 
         <?php endif; ?>
@@ -158,7 +158,7 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
 
 <script>
     Vue.config.devtools = true
-    new Vue({
+    const vue = new Vue({
         el: '#app',
         data() {
             return {
@@ -214,18 +214,6 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
                     .catch(function(error) {
                         console.log("Erro!");
                     });
-            },
-            Cadastrar() {
-                var vue = this;
-                axios.post('/carrinho/cadastrar', {
-                        items: vue.items,
-                    }).then(function(response) {
-                        console.log(response)
-                        //window.location.href = "/carrinho/"
-                    })
-                    .catch(function(error) {
-                        console.log("Erro!");
-                    });
             }
         }
     });
@@ -269,8 +257,17 @@ $this->layout('_layout', ['title' => 'Ckeckout Final']) ?>
             return actions.order.capture().then(function(details) {
 
                 // This function shows a transaction success message to your buyer.
+                axios.post('/carrinho/cadastrar', {
+                        items: vue.items,
+                    }).then(function(response) {
+                        console.log(response)
+                        window.location.href = "/carrinho/gratidao"
+                    })
+                    .catch(function(error) {
+                        console.log("Erro!");
+                    });
 
-                alert('Transaction completed by ' + details.payer.name.given_name);
+                alert('Transferencia feita com sucesso');
 
             });
 
