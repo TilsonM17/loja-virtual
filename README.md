@@ -1,4 +1,4 @@
-# Loja Virtual
+# Loja Virtual (Loja de Livros)
 
 ## Visão geral
 
@@ -32,7 +32,7 @@ Para rodar o projecto rode o seguinte comando:
 
 Este comando vai iniciar o servidor embutido do php com o ***target*** para a pasta **public** que é a porta de entrada para a nossa aplicação.
 
-## Screenshots
+## Screenshots Usuario
 
 
 ### Tela inicial com Usuario Logado
@@ -40,3 +40,26 @@ Este comando vai iniciar o servidor embutido do php com o ***target*** para a pa
 
 ### Checkout Final, integração com Paypal
 ![Tela do checkout Final](.Material/02.png)
+
+### Depois de Fazer Login no Paypal Sandbox, escolher a bandeira de pagamento
+![Tela do checkout Final](.Material/03.png)
+
+
+### Mensagem de Sucesso
+![Tela do checkout Final](.Material/04.png)
+
+---
+
+## Tela do Admin
+
+
+### Analise de Vendas com ApexCharts.js
+![Tela do checkout Final](.Material/adm_03.png)
+
+
+### Cadastro de Novos Livros
+![Tela do checkout Final](.Material/adm_02.png)
+
+------
+
+## Resto é conversa
